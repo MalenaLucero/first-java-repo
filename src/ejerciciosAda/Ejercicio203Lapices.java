@@ -3,14 +3,15 @@ package ejerciciosAda;
 import java.util.Scanner;
 
 public class Ejercicio203Lapices {
-	private final static int PRECIO_MAYORISTA = 85;
-	private final static int PRECIO_MINORISTA = 90;
-	private final static int CANTIDAD_MAYORISTA = 1000;
+	private static final int PRECIO_MAYORISTA = 85;
+	private static final int PRECIO_MINORISTA = 90;
+	private static final int CANTIDAD_MAYORISTA = 1000;
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Ingresar la cantidad de lapices que quiere comprar:");
 		int cantidadCompra = sc.nextInt();
+		sc.close();
 		
 		int precioTotal = 0;
 		if(cantidadCompra >= CANTIDAD_MAYORISTA) {
@@ -24,7 +25,5 @@ public class Ejercicio203Lapices {
 		if(precioTotal > 0) {
 			System.out.println("Precio total: $" + precioTotal);
 		}
-		
-		sc.close();
 	}
 }
