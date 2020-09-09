@@ -10,7 +10,8 @@ public class EjercicioCajas {
 
 	public static void main(String[] args) {
 		int cajas[] = new int[4];
-		for(int i=0; i < cajas.length; i++) cajas[i] = 0;
+		
+		for(int i: cajas) cajas[i] = 0;
 		Scanner sc = new Scanner(System.in);
 		
 		boolean flag = true;
@@ -34,10 +35,11 @@ public class EjercicioCajas {
 				System.out.println("Caja: " + caja + " Importe: $" + cajas[caja-1]);
 			}
 		}
+		sc.close();
 		
 		int totalFacturado = 0;
 		System.out.print("Importe por caja: ");
-		for(int i=0; i < cajas.length; i++) {
+		for(int i: cajas) {
 			System.out.print(cajas[i] + " ");
 			totalFacturado = totalFacturado + cajas[i];
 		}
