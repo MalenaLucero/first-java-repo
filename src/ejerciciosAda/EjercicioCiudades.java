@@ -19,7 +19,7 @@ import java.util.Scanner;
 public class EjercicioCiudades {
 	public static final String TERMINAL_SALIDA = "LEMOS";
 	public static final String TERMINAL_LLEGADA = "LACROZE";
-	public static final int DISTANCIA_TOTAL = 70;
+	public static final int DISTANCIA_TOTAL = 60;
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -110,13 +110,18 @@ public class EjercicioCiudades {
 		} else {
 			estacionMasCercana = estacionesNombres[indiceEstacionesCercanas[1]];
 		}
-		System.out.println("La estacion mas cercana es " + estacionMasCercana);
+		System.out.println();
+		System.out.println("La estacion mas cercana es " + estacionMasCercana.toUpperCase());
 		
 		
 		// UBICACION EN PANTALLA
+		System.out.println();
+		System.out.println("TU UBICACION EN EL MAPA:");
+		System.out.println();
 		int tramoUbicacion = ubicacion;
 		for(int i=0; i<indiceEstacionesCercanas[1]; i++) {
 			tramoUbicacion += estacionesNombres[i].length();
+			tramoUbicacion += 4;
 		}
 		System.out.print(String.join("", Collections.nCopies(tramoUbicacion, " ")));
 		System.out.print("*");
@@ -125,8 +130,8 @@ public class EjercicioCiudades {
 		// RECORRIDO DEL TREN
 		int aux = 0;
 		for(int i=0; i< estacionesNombres.length; i++) {
-			String tramo = String.join("", Collections.nCopies(estacionesDistancias[i], "-"));
-			System.out.print(tramo + estacionesNombres[i]);
+			String tramo = String.join("", Collections.nCopies(estacionesDistancias[i], "="));
+			System.out.print(tramo + " |" + estacionesNombres[i] + "| ");
 			aux += estacionesDistancias[i];
 		}
 		sc.close();
