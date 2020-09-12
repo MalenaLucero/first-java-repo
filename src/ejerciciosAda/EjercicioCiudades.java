@@ -48,7 +48,7 @@ public class EjercicioCiudades {
 		
 		// DISTANCIA ENTRE LAS ESTACIONES
 		int estacionesDistancias[] = new int[estacionesCantidad + 2];
-		//int estacionesDistancias[] = {0, 10, 20, 30, 10}; 
+		//int estacionesDistancias[] = {0, 10, 20, 20, 10}; 
 		int acumuladorDistancia = 0;
 		System.out.println("Ingrese la distancia de las estaciones");
 		System.out.println("Tenga en cuenta que la distancia total es " + DISTANCIA_TOTAL);
