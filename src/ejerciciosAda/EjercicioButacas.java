@@ -13,16 +13,36 @@ public class EjercicioButacas {
 	
 	public static void main(String[] args) {
 		mostrarTitulo("Bienvenido al sistema de venta de boletos");
-		int asientos[] = new int[ASIENTOS_DISPONIBLES];
-		asientos = inicializarAsientos(asientos);
-		int totalAsientosOcupados = procesamiento(asientos);
+		int asientosCargados[] = cargarAsientos();
+		int asientosOcupados[] = filtrarAsientos(asientosCargados, 1);
+		int asientosLibres[] = filtrarAsientos(asientosCargados, 0);
 		
-		System.out.println("Asientos ocupados: " + totalAsientosOcupados);
-		int asientosLibres = ASIENTOS_DISPONIBLES - totalAsientosOcupados;
-		System.out.println("Asientos libres: " + asientosLibres);
-		
+		System.out.println("Asientos ocupados: " + asientosOcupados.length);
+		System.out.println("Asientos libres: " + asientosLibres.length);
 	}
 	
+	private static int[] filtrarAsientos(int[] asientosCargados, int tipo) {
+		int acumulador = 0;
+		for(int i=0; i<asientosCargados.length; i++) {
+			if(asientosCargados[i] == tipo) acumulador += 1;
+		}
+		int asientosOcupados[] = new int[acumulador];
+		int nuevoAcumulador = 0;
+		for(int i=0; i<asientosOcupados.length; i++) {
+			boolean flag = true;
+			while(flag) {
+				if(asientosCargados[nuevoAcumulador] == tipo) {
+					asientosOcupados[i] = nuevoAcumulador + 1;
+					nuevoAcumulador += 1;
+					flag = false;
+				} else {
+					nuevoAcumulador += 1;
+				}
+			}
+		}
+		return asientosOcupados;
+	}
+
 	private static void mostrarTitulo(String titulo) {
 		dibujarTrayecto(titulo.length(), "=");
 		System.out.println();
@@ -31,25 +51,27 @@ public class EjercicioButacas {
 		System.out.println();
 	}
 
-	private static void dibujarTrayecto(int distancia, String simbolo) {
-		for(int i=0; i<distancia; i++) {
+	private static void dibujarTrayecto(int longitud, String simbolo) {
+		for(int i=0; i<longitud; i++) {
 			System.out.print(simbolo);
 		}
 	}
 
-	private static int procesamiento(int[] asientos) {
-		int totalAsientosOcupados = 0;
-		int asientoSolicitado = 0;
+	private static int[] cargarAsientos() {
+		int asientos[] = inicializarAsientos();
 		Scanner sc = new Scanner(System.in);
-		while(asientoSolicitado != 99) {
-			System.out.println("Ingresar numero de asiento");
+		int asientoSolicitado = 0;
+		boolean teatroLleno = false;
+		while(asientoSolicitado != 99 && !teatroLleno) {
+			System.out.println("Ingresar numero de asiento o 99 para finalizar:");
 			asientoSolicitado = sc.nextInt();
 			boolean asientoValido = validarAsiento(asientoSolicitado);
 			if(asientoValido) {
-				if(asientos[asientoSolicitado -1] == 0) {
+				boolean asientoVacio = verificarAsientoVacio(asientoSolicitado, asientos);
+				if(asientoVacio) {
 					System.out.println("Asiento disponible. Venta confirmada");
 					asientos[asientoSolicitado -1] = 1;
-					totalAsientosOcupados += 1;
+					teatroLleno = verificarTeatroLleno(asientos);
 				} else {
 					System.out.println("Asiento no disponible");
 				}
@@ -57,16 +79,36 @@ public class EjercicioButacas {
 				System.out.println("Asiento invalido");
 			}
 		}
-		if(totalAsientosOcupados == asientos.length) {
-			System.out.println("Ya no quedan asientos disponibles");
+		if(teatroLleno) {
+			System.out.println("Teatro Lleno. No quedan mas asientos disponibles");
 		}
+		System.out.println("Carga de asientos finalizada");
 		sc.close();
-		return totalAsientosOcupados;
+		return asientos;
 	}
 
-	private static int[] inicializarAsientos(int[] asientos) {
+	private static boolean verificarTeatroLleno(int[] asientos) {
+		boolean flag = true;
 		for(int i=0; i<asientos.length; i++) {
-			asientos[i] = 0;
+			if(asientos[i] == 0) {
+				flag = false;
+			}
+		}
+		return flag;
+	}
+
+	private static boolean verificarAsientoVacio(int asientoSolicitado, int[] asientos) {
+		if(asientos[asientoSolicitado -1] == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private static int[] inicializarAsientos() {
+		int asientos[] = new int[ASIENTOS_DISPONIBLES];
+		for(int i:asientos) {
+			i = 0;
 		}
 		return asientos;
 	}
@@ -77,5 +119,11 @@ public class EjercicioButacas {
 		} else {
 			return false;
 		}
+	}
+	
+	private static void imprimirArray(int[] arr) {
+		System.out.print("Array: ");
+		for(int i:arr) System.out.print(i + " ");
+		System.out.println();
 	}
 }
