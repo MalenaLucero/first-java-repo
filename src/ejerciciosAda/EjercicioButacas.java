@@ -16,11 +16,20 @@ public class EjercicioButacas {
 		int asientosCargados[] = cargarAsientos();
 		int asientosOcupados[] = filtrarAsientos(asientosCargados, 1);
 		int asientosLibres[] = filtrarAsientos(asientosCargados, 0);
-		
-		System.out.println("Asientos ocupados: " + asientosOcupados.length);
-		System.out.println("Asientos libres: " + asientosLibres.length);
+		imprimirAsientos(asientosOcupados, "ocupados");
+		imprimirAsientos(asientosLibres, "libres");
 	}
 	
+	private static void imprimirAsientos(int[] asientos, String tipo) {
+		dibujarTrayecto(30, "-");
+		System.out.println();
+		int total = asientos.length;
+		System.out.println("Total de asientos " + tipo + ": " + total);
+		System.out.print("Asientos " + tipo + ": ");
+		imprimirArray(asientos);
+		System.out.println();
+	}
+
 	private static int[] filtrarAsientos(int[] asientosCargados, int tipo) {
 		int acumulador = 0;
 		for(int i=0; i<asientosCargados.length; i++) {
@@ -82,7 +91,9 @@ public class EjercicioButacas {
 		if(teatroLleno) {
 			System.out.println("Teatro Lleno. No quedan mas asientos disponibles");
 		}
-		System.out.println("Carga de asientos finalizada");
+		dibujarTrayecto(30, "-");
+		System.out.println();
+		System.out.println("Carga de asientos finalizada".toUpperCase());
 		sc.close();
 		return asientos;
 	}
@@ -122,8 +133,6 @@ public class EjercicioButacas {
 	}
 	
 	private static void imprimirArray(int[] arr) {
-		System.out.print("Array: ");
 		for(int i:arr) System.out.print(i + " ");
-		System.out.println();
 	}
 }
