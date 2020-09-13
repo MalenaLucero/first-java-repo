@@ -9,7 +9,7 @@ import java.util.Scanner;
 //Listar los asientos vendidos
 
 public class EjercicioButacas {
-	private static final int ASIENTOS_DISPONIBLES = 10;
+	private static final int ASIENTOS_DISPONIBLES = 50;
 	
 	public static void main(String[] args) {
 		mostrarTitulo("Bienvenido al sistema de venta de boletos");
@@ -18,40 +18,9 @@ public class EjercicioButacas {
 		int asientosLibres[] = filtrarAsientos(asientosCargados, 0);
 		imprimirAsientos(asientosOcupados, "ocupados");
 		imprimirAsientos(asientosLibres, "libres");
+		imprimirTeatro(asientosCargados, 5);
 	}
 	
-	private static void imprimirAsientos(int[] asientos, String tipo) {
-		dibujarTrayecto(30, "-");
-		System.out.println();
-		int total = asientos.length;
-		System.out.println("Total de asientos " + tipo + ": " + total);
-		System.out.print("Asientos " + tipo + ": ");
-		imprimirArray(asientos);
-		System.out.println();
-	}
-
-	private static int[] filtrarAsientos(int[] asientosCargados, int tipo) {
-		int acumulador = 0;
-		for(int i=0; i<asientosCargados.length; i++) {
-			if(asientosCargados[i] == tipo) acumulador += 1;
-		}
-		int asientosOcupados[] = new int[acumulador];
-		int nuevoAcumulador = 0;
-		for(int i=0; i<asientosOcupados.length; i++) {
-			boolean flag = true;
-			while(flag) {
-				if(asientosCargados[nuevoAcumulador] == tipo) {
-					asientosOcupados[i] = nuevoAcumulador + 1;
-					nuevoAcumulador += 1;
-					flag = false;
-				} else {
-					nuevoAcumulador += 1;
-				}
-			}
-		}
-		return asientosOcupados;
-	}
-
 	private static void mostrarTitulo(String titulo) {
 		dibujarTrayecto(titulo.length(), "=");
 		System.out.println();
@@ -59,13 +28,7 @@ public class EjercicioButacas {
 		dibujarTrayecto(titulo.length(), "=");
 		System.out.println();
 	}
-
-	private static void dibujarTrayecto(int longitud, String simbolo) {
-		for(int i=0; i<longitud; i++) {
-			System.out.print(simbolo);
-		}
-	}
-
+	
 	private static int[] cargarAsientos() {
 		int asientos[] = inicializarAsientos();
 		Scanner sc = new Scanner(System.in);
@@ -97,6 +60,20 @@ public class EjercicioButacas {
 		sc.close();
 		return asientos;
 	}
+	
+	private static int[] inicializarAsientos() {
+		int asientos[] = new int[ASIENTOS_DISPONIBLES];
+		for(int i:asientos) {
+			i = 0;
+		}
+		return asientos;
+	}	
+
+	private static void dibujarTrayecto(int longitud, String simbolo) {
+		for(int i=0; i<longitud; i++) {
+			System.out.print(simbolo);
+		}
+	}
 
 	private static boolean verificarTeatroLleno(int[] asientos) {
 		boolean flag = true;
@@ -116,14 +93,6 @@ public class EjercicioButacas {
 		}
 	}
 
-	private static int[] inicializarAsientos() {
-		int asientos[] = new int[ASIENTOS_DISPONIBLES];
-		for(int i:asientos) {
-			i = 0;
-		}
-		return asientos;
-	}
-
 	private static boolean validarAsiento(int asiento) {
 		if(asiento > 0 && asiento < ASIENTOS_DISPONIBLES + 1) {
 			return true;
@@ -132,7 +101,61 @@ public class EjercicioButacas {
 		}
 	}
 	
+	private static int[] filtrarAsientos(int[] asientosCargados, int tipo) {
+		int acumulador = 0;
+		for(int i=0; i<asientosCargados.length; i++) {
+			if(asientosCargados[i] == tipo) acumulador += 1;
+		}
+		int asientosOcupados[] = new int[acumulador];
+		int nuevoAcumulador = 0;
+		for(int i=0; i<asientosOcupados.length; i++) {
+			boolean flag = true;
+			while(flag) {
+				if(asientosCargados[nuevoAcumulador] == tipo) {
+					asientosOcupados[i] = nuevoAcumulador + 1;
+					nuevoAcumulador += 1;
+					flag = false;
+				} else {
+					nuevoAcumulador += 1;
+				}
+			}
+		}
+		return asientosOcupados;
+	}
+	
+	private static void imprimirAsientos(int[] asientos, String tipo) {
+		dibujarTrayecto(30, "-");
+		System.out.println();
+		int total = asientos.length;
+		System.out.println("Total de asientos " + tipo + ": " + total);
+		System.out.print("Asientos " + tipo + ": ");
+		imprimirArray(asientos);
+		System.out.println();
+	}
+	
 	private static void imprimirArray(int[] arr) {
 		for(int i:arr) System.out.print(i + " ");
+	}
+	
+	private static void imprimirTeatro(int[] asientosCargados, int filas) {
+		System.out.println();
+		int corte = asientosCargados.length/filas;
+		int acumulador = 0;
+		for(int i=0; i<asientosCargados.length; i++) {
+			imprimirAsiento(asientosCargados[i]);
+			acumulador += 1;
+			if(acumulador == corte) {
+				System.out.println();
+				acumulador = 0;
+			}
+		}
+	}
+	
+	private static void imprimirAsiento(int num) {
+		if(num == 0) {
+			System.out.print(" ○");
+		} else {
+			System.out.print(" ●");
+		}
 	}
 }
