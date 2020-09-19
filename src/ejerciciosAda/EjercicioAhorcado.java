@@ -11,15 +11,20 @@ public class EjercicioAhorcado {
 		String palabraSecreta = cargarPalabraSecreta(sc);
 		boolean espacios[] = inicializarArrayBooleanos(palabraSecreta);
 		int errores = 0;
+		int intentos = 0;
+		char letrasIngresadas[] = new char[palabraSecreta.length() + INTENTOS];
 		imprimirMensajeInicial();
 		
 		while(!partidaTerminada(espacios) && errores < INTENTOS) {
 			imprimirProgreso(espacios, palabraSecreta);
 			char letra = cargarLetra(sc);
-			boolean letraIncluida = palabraSecreta.indexOf(letra) != -1;
-			if(letraIncluida) {
-				procesarLetra(letra, espacios, palabraSecreta);
-				System.out.println("Muy bien!");
+			if(!letraYaIngresada(letrasIngresadas, letra)) {
+				letrasIngresadas[intentos] = letra;
+				intentos++;
+				if(palabraSecreta.indexOf(letra) != -1) {
+					procesarLetra(letra, espacios, palabraSecreta);
+					System.out.println("Muy bien!");
+				}
 			} else {
 				errores++;
 				imprimirIntentosRestantes(errores);
@@ -29,6 +34,20 @@ public class EjercicioAhorcado {
 		imprimirPalabraSecreta(palabraSecreta);
 	}
 	
+	private static void imprimirPersonita() {
+		System.out.println(" O");
+		System.out.print("/" + "|" + "\\");
+		System.out.println();
+		System.out.print("/ " + "\\");
+	}
+
+	private static boolean letraYaIngresada(char[] letrasIngresadas, char letra) {
+		for(char c: letrasIngresadas) {
+			if(c == letra) return true;
+		}
+		return false;
+	}
+
 	private static void imprimirMensajeInicial() {
 		System.out.println();
 		System.out.println("Tenés " + INTENTOS + " intentos");
@@ -36,7 +55,7 @@ public class EjercicioAhorcado {
 	}
 
 	private static void imprimirTitulo() {
-		String titulo = "Bienvenido al juego del ahorcado!";
+		String titulo = "Bienvenido al juego del ahorcado";
 		dibujarTrayecto(titulo.length(), "~");
 		System.out.println();
 		System.out.println(titulo.toUpperCase());
@@ -75,8 +94,7 @@ public class EjercicioAhorcado {
 
 	private static char cargarLetra(Scanner sc) {
 		System.out.println("Ingresá una letra:");
-		String letra = sc.next();
-		return letra.charAt(0);
+		return Character.toUpperCase(sc.next().charAt(0));
 	}
 
 	private static boolean partidaTerminada(boolean[] espacios) {
@@ -88,7 +106,7 @@ public class EjercicioAhorcado {
 
 	private static String cargarPalabraSecreta(Scanner sc) {
 		System.out.println("Ingresá la palabra secreta:");
-		return sc.next();
+		return sc.next().toUpperCase();
 	}
 
 	private static boolean[] inicializarArrayBooleanos(String palabraSecreta) {
