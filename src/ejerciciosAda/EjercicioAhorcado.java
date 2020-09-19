@@ -1,14 +1,21 @@
 package ejerciciosAda;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Scanner;
 
 public class EjercicioAhorcado {
 	public static final int INTENTOS = 5;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		imprimirTitulo();
 		Scanner sc = new Scanner(System.in);
-		String palabraSecreta = cargarPalabraSecreta(sc);
+		//String palabraSecreta = cargarPalabraSecreta(sc);
+		String palabraSecreta = getPalabra();
+		System.out.println(palabraSecreta);
 		boolean espacios[] = inicializarArrayBooleanos(palabraSecreta);
 		int errores = 0;
 		int intentos = 0;
@@ -24,6 +31,9 @@ public class EjercicioAhorcado {
 				if(palabraSecreta.indexOf(letra) != -1) {
 					procesarLetra(letra, espacios, palabraSecreta);
 					System.out.println("Muy bien!");
+				} else {
+					errores++;
+					imprimirIntentosRestantes(errores);
 				}
 			} else {
 				errores++;
@@ -33,7 +43,7 @@ public class EjercicioAhorcado {
 		imprimirEstado(errores);
 		imprimirPalabraSecreta(palabraSecreta);
 	}
-	
+
 	private static void imprimirPersonita() {
 		System.out.println(" O");
 		System.out.print("/" + "|" + "\\");
@@ -132,5 +142,22 @@ public class EjercicioAhorcado {
 		for(int i=0; i<longitud; i++) {
 			System.out.print(simbolo);
 		}
+	}
+	
+	private static String getPalabra() throws IOException {
+		System.out.println("Buscando palabra en ingles...");
+		URL url = new URL("https://random-word-api.herokuapp.com/word?number=1");
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		con.setRequestMethod("GET");
+		int status = con.getResponseCode();
+		BufferedReader in = new BufferedReader(
+		new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer content = new StringBuffer();
+		while ((inputLine = in.readLine()) != null) {
+		    content.append(inputLine);
+		}
+		in.close();
+		return content.substring(2, content.length() - 2).toUpperCase();
 	}
 }

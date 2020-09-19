@@ -12,6 +12,8 @@ public class HttpRequest {
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 		con.setRequestMethod("GET");
 		int status = con.getResponseCode();
+		//status 200 quiere decir que salio todo bien
+		System.out.println(status);
 		BufferedReader in = new BufferedReader(
 		new InputStreamReader(con.getInputStream()));
 		String inputLine;
@@ -19,6 +21,7 @@ public class HttpRequest {
 		while ((inputLine = in.readLine()) != null) {
 		    content.append(inputLine);
 		}
+		//content es la respuesta de la api como String
 		System.out.println(content);
 		in.close();
 	}
