@@ -2,7 +2,6 @@ package ejerciciosAda;
 
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Arrays;
 
 //Ejercicio : 
 //Desarrollar un sistema que permita el ingreso de totales recaudados de lunes a viernes, 
@@ -31,28 +30,36 @@ public class EjercicioConMenu {
 			opcion = sc.nextInt();
 			switch(opcion) {
 			case 1:
+				imprimirTitulo(opcion);
 				AgregarValores(totalesRecaudados, sc);
 				break;
 			case 2:
+				imprimirTitulo(opcion);
 				ListarValoresPorDia(totalesRecaudados);
 				break;
 			case 3:
+				imprimirTitulo(opcion);
 				ListarValoresOrdenados(totalesRecaudados);
 				break;
 			case 4:
+				imprimirTitulo(opcion);
 				ModificarValores(totalesRecaudados, sc);
 				break;
 			}
 		}
+		System.out.println();
 		System.out.println("Gracias por usar este programa");
 	}
 	
-	private static void ListarValoresOrdenados(int[] totalesRecaudados) {
-		String titulo = OPCIONES_MENU[2];
+	private static void imprimirTitulo(int i) {
+		String titulo = OPCIONES_MENU[i - 1];
 		dibujarTrayecto(titulo.length(), "=");
 		System.out.println(titulo.toUpperCase());
 		dibujarTrayecto(titulo.length(), "=");
 		System.out.println();
+	}
+
+	private static void ListarValoresOrdenados(int[] totalesRecaudados) {
 		int aux[] = totalesRecaudados.clone();
 		Arrays.sort(aux);
 		for(int i: aux) {
@@ -62,10 +69,6 @@ public class EjercicioConMenu {
 	}
 
 	private static void ModificarValores(int[] totalesRecaudados, Scanner sc) {
-		String titulo = OPCIONES_MENU[3];
-		dibujarTrayecto(titulo.length(), "=");
-		System.out.println(titulo.toUpperCase());
-		dibujarTrayecto(titulo.length(), "=");
 		System.out.println("Ingresar numero de dia:");
 		int dia = sc.nextInt();
 		System.out.println("Ingresar valor modificado:");
@@ -74,21 +77,12 @@ public class EjercicioConMenu {
 	}
 
 	private static void ListarValoresPorDia(int[] totalesRecaudados) {
-		String titulo = OPCIONES_MENU[1];
-		dibujarTrayecto(titulo.length(), "=");
-		System.out.println(titulo.toUpperCase());
-		dibujarTrayecto(titulo.length(), "=");
-		System.out.println();
 		for(int i=0; i<totalesRecaudados.length; i++) {
 			System.out.println(DIAS[i] + ": " + totalesRecaudados[i]);
 		}
 	}
 
 	private static void AgregarValores(int[] totalesRecaudados, Scanner sc) {
-		String titulo = OPCIONES_MENU[0];
-		dibujarTrayecto(titulo.length(), "=");
-		System.out.println(titulo.toUpperCase());
-		dibujarTrayecto(titulo.length(), "=");
 		for(int i=0; i<totalesRecaudados.length; i++) {
 			System.out.println("Ingrese el total recaudado del " + DIAS[i] + ":");
 			totalesRecaudados[i] = sc.nextInt();
