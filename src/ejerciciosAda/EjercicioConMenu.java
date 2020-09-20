@@ -1,6 +1,8 @@
 package ejerciciosAda;
 
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Arrays;
 
 //Ejercicio : 
 //Desarrollar un sistema que permita el ingreso de totales recaudados de lunes a viernes, 
@@ -13,8 +15,9 @@ public class EjercicioConMenu {
 	public static final String DIAS[] = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes"};
 	public static final String OPCIONES_MENU[] = {
 			"1. Agregar valores totales recaudados",
-			"2. Listas los valores totales recaudados",
-			"3. Modificar los valores totales recaudados",
+			"2. Listar los totales recaudados por dia",
+			"3. Listar los totales recaudados de menor a mayor",
+			"4. Modificar los valores totales recaudados",
 			"0. Salir"
 	};
 	
@@ -24,44 +27,68 @@ public class EjercicioConMenu {
 		int totalesRecaudados[] = new int[DIAS.length];
 		
 		while(opcion != 0) {
-			System.out.println("Ingresar opcion");
 			imprimirMenu();
 			opcion = sc.nextInt();
 			switch(opcion) {
 			case 1:
-				System.out.println(OPCIONES_MENU[0]);
 				AgregarValores(totalesRecaudados, sc);
 				break;
 			case 2:
-				System.out.println(OPCIONES_MENU[1]);
-				ListarValores(totalesRecaudados);
+				ListarValoresPorDia(totalesRecaudados);
 				break;
 			case 3:
-				System.out.println(OPCIONES_MENU[2]);
-				ModificarValores(totalesRecaudados, sc);
+				ListarValoresOrdenados(totalesRecaudados);
 				break;
-			default:
-				System.out.println("Ninguna de las anteriores");
+			case 4:
+				ModificarValores(totalesRecaudados, sc);
 				break;
 			}
 		}
 		System.out.println("Gracias por usar este programa");
 	}
+	
+	private static void ListarValoresOrdenados(int[] totalesRecaudados) {
+		String titulo = OPCIONES_MENU[2];
+		dibujarTrayecto(titulo.length(), "=");
+		System.out.println(titulo.toUpperCase());
+		dibujarTrayecto(titulo.length(), "=");
+		System.out.println();
+		int aux[] = totalesRecaudados.clone();
+		Arrays.sort(aux);
+		for(int i: aux) {
+			System.out.print(i + " ");
+		}
+		System.out.println();
+	}
 
 	private static void ModificarValores(int[] totalesRecaudados, Scanner sc) {
+		String titulo = OPCIONES_MENU[3];
+		dibujarTrayecto(titulo.length(), "=");
+		System.out.println(titulo.toUpperCase());
+		dibujarTrayecto(titulo.length(), "=");
 		System.out.println("Ingresar numero de dia:");
 		int dia = sc.nextInt();
 		System.out.println("Ingresar valor modificado:");
 		totalesRecaudados[dia-1] = sc.nextInt();
-		System.out.println("Nuevo valor del dia " + DIAS[dia] + ": " + totalesRecaudados[dia-1]);
+		System.out.println("Nuevo valor del dia " + DIAS[dia-1] + ": " + totalesRecaudados[dia-1]);
 	}
 
-	private static void ListarValores(int[] totalesRecaudados) {
-		for(int i: totalesRecaudados) System.out.print(i + " ");
+	private static void ListarValoresPorDia(int[] totalesRecaudados) {
+		String titulo = OPCIONES_MENU[1];
+		dibujarTrayecto(titulo.length(), "=");
+		System.out.println(titulo.toUpperCase());
+		dibujarTrayecto(titulo.length(), "=");
 		System.out.println();
+		for(int i=0; i<totalesRecaudados.length; i++) {
+			System.out.println(DIAS[i] + ": " + totalesRecaudados[i]);
+		}
 	}
 
 	private static void AgregarValores(int[] totalesRecaudados, Scanner sc) {
+		String titulo = OPCIONES_MENU[0];
+		dibujarTrayecto(titulo.length(), "=");
+		System.out.println(titulo.toUpperCase());
+		dibujarTrayecto(titulo.length(), "=");
 		for(int i=0; i<totalesRecaudados.length; i++) {
 			System.out.println("Ingrese el total recaudado del " + DIAS[i] + ":");
 			totalesRecaudados[i] = sc.nextInt();
@@ -70,6 +97,17 @@ public class EjercicioConMenu {
 	}
 
 	private static void imprimirMenu() {
+		System.out.println();
+		System.out.println("-----------------MENU-----------------");
 		for(String i: OPCIONES_MENU) System.out.println(i);
+		System.out.println("--------------------------------------");
+		System.out.println("Ingresar opcion:");
+	}
+	
+	private static void dibujarTrayecto(int longitud, String simbolo) {
+		for(int i=0; i<longitud; i++) {
+			System.out.print(simbolo);
+		}
+		System.out.println();
 	}
 }
