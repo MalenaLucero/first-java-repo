@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class EjercicioPantallaMensaje {
 	public static final int WIDTH = 90;
-	//public static final int HEIGHT = 6;
+	public static final int HEIGHT = 5;
 	public static final String SIMBOLO = "#";
 	
 	public static void main(String[] args) {
@@ -20,14 +20,31 @@ public class EjercicioPantallaMensaje {
 	}
 
 	private static void dibujarPantalla(String palabra) {
-		dibujarTrayecto();
-		centrarPalabra(palabra, false);
-		centrarPalabra(palabra, true);
-		centrarPalabra(palabra, false);
-		dibujarTrayecto();
+		for(int i=0; i<HEIGHT; i++) {
+			if(i == 0 || i == HEIGHT - 1) {
+				dibujarTrayecto(false);
+			} else if (i == HEIGHT/2) {
+				centrarPalabra(palabra);
+			} else {
+				dibujarTrayecto(true);
+			}
+		}
 	}
 	
-	private static void centrarPalabra(String palabra, boolean imprimirPalabra) {
+	private static void dibujarTrayecto(boolean centroVacio) {
+		for(int i=0; i<WIDTH; i++) {
+			if(i == 0 || i == WIDTH - 1) {
+				System.out.print(SIMBOLO);
+			} else if(centroVacio){
+				System.out.print(" ");
+			} else {
+				System.out.print(SIMBOLO);
+			}
+		}
+		System.out.println();
+	}
+
+	private static void centrarPalabra(String palabra) {
 		int comienzoPalabra = (WIDTH/2)-(palabra.length()/2);
 		int finalPalabra = 0;
 		if(palabra.length() % 2 == 0) {
@@ -39,26 +56,13 @@ public class EjercicioPantallaMensaje {
 		for(int i=0; i<WIDTH; i++) {
 			if(i == 0 || i == WIDTH - 1) {
 				System.out.print(SIMBOLO);
-			} else {
-				if(imprimirPalabra) {
-					if(i < comienzoPalabra) {
-						System.out.print(" ");
-					} else if (i == comienzoPalabra) {
-						System.out.print(palabra);
-					} else if (i > finalPalabra) {
-						System.out.print(" ");
-					}
-				} else {
-					System.out.print(" ");
-				}
+			} else if (i < comienzoPalabra){
+				System.out.print(" ");
+			} else if (i == comienzoPalabra) {
+				System.out.print(palabra);
+			} else if (i > finalPalabra) {
+				System.out.print(" ");
 			}
-		}
-		System.out.println();
-	}
-
-	private static void dibujarTrayecto() {
-		for(int i=0; i<WIDTH; i++) {
-			System.out.print(SIMBOLO);
 		}
 		System.out.println();
 	}
