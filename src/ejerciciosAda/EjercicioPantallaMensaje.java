@@ -7,8 +7,8 @@ import java.util.Scanner;
 //el alto del recuadro debe pasarse por parametro
 
 public class EjercicioPantallaMensaje {
-	public static final int WIDTH = 90;
-	//public static final int HEIGHT = 6;
+	public static final int ANCHO = 90;
+	public static final int ALTO = 5;
 	public static final String SIMBOLO = "#";
 	
 	public static void main(String[] args) {
@@ -20,45 +20,47 @@ public class EjercicioPantallaMensaje {
 	}
 
 	private static void dibujarPantalla(String palabra) {
-		dibujarTrayecto();
-		centrarPalabra(palabra, false);
-		centrarPalabra(palabra, true);
-		centrarPalabra(palabra, false);
-		dibujarTrayecto();
+		for(int i=0; i<ALTO; i++) {
+			if(i == 0 || i == ALTO - 1) {
+				dibujarTrayecto(false);
+			} else if (i == ALTO/2) {
+				centrarPalabra(palabra);
+			} else {
+				dibujarTrayecto(true);
+			}
+		}
 	}
 	
-	private static void centrarPalabra(String palabra, boolean imprimirPalabra) {
-		int comienzoPalabra = (WIDTH/2)-(palabra.length()/2);
-		int finalPalabra = 0;
-		if(palabra.length() % 2 == 0) {
-			finalPalabra = (WIDTH/2)+(palabra.length()/2)-1;
-		} else {
-			finalPalabra = (WIDTH/2)+(palabra.length()/2);
-		}
-		
-		for(int i=0; i<WIDTH; i++) {
-			if(i == 0 || i == WIDTH - 1) {
+	private static void dibujarTrayecto(boolean centroVacio) {
+		for(int i=0; i<ANCHO; i++) {
+			if(i == 0 || i == ANCHO - 1) {
 				System.out.print(SIMBOLO);
+			} else if(centroVacio){
+				System.out.print(" ");
 			} else {
-				if(imprimirPalabra) {
-					if(i < comienzoPalabra) {
-						System.out.print(" ");
-					} else if (i == comienzoPalabra) {
-						System.out.print(palabra);
-					} else if (i > finalPalabra) {
-						System.out.print(" ");
-					}
-				} else {
-					System.out.print(" ");
-				}
+				System.out.print(SIMBOLO);
 			}
 		}
 		System.out.println();
 	}
 
-	private static void dibujarTrayecto() {
-		for(int i=0; i<WIDTH; i++) {
-			System.out.print(SIMBOLO);
+	private static void centrarPalabra(String palabra) {
+		int comienzoPalabra = (ANCHO/2)-(palabra.length()/2);
+		int finalPalabra = 0;
+		if(palabra.length() % 2 == 0) {
+			finalPalabra = (ANCHO/2)+(palabra.length()/2)-1;
+		} else {
+			finalPalabra = (ANCHO/2)+(palabra.length()/2);
+		}
+		
+		for(int i=0; i<ANCHO; i++) {
+			if(i == 0 || i == ANCHO - 1) {
+				System.out.print(SIMBOLO);
+			} else if (i < comienzoPalabra || i > finalPalabra){
+				System.out.print(" ");
+			} else if (i == comienzoPalabra) {
+				System.out.print(palabra);
+			}
 		}
 		System.out.println();
 	}
