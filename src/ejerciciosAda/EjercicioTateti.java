@@ -16,11 +16,12 @@ public class EjercicioTateti {
 		imprimirTitulo();
 		Scanner sc = new Scanner(System.in);
 		char tablero[][] = inicializarTablero();
+		String nombreJugadores[] = ingresarNombreJugadores(sc);
 		boolean jugadores[] = {true, false};
 		int contador = 0;
 		
 		while(!partidaTerminada(tablero) && contador < 9) {
-			mostrarTurno(jugadores);
+			mostrarTurno(jugadores, nombreJugadores);
 			ingresarJugada(jugadores, tablero, sc);
 			mostrarTablero(tablero);
 			if(!partidaTerminada(tablero)) {
@@ -33,10 +34,19 @@ public class EjercicioTateti {
 		System.out.println();
 		System.out.println("¡PARTIDA TERMINADA!");
 		if(contador < 9) {
-			imprimirMensajeGanador(jugadores);
+			imprimirMensajeGanador(jugadores, nombreJugadores);
 		} else {
 			System.out.println("No gano nadie :(");
 		}	
+	}
+
+	private static String[] ingresarNombreJugadores(Scanner sc) {
+		String nombres[] = new String[2];
+		for(int i=0; i<nombres.length; i++) {
+			System.out.println("Ingrese el nombre del jugador " + (i+1));
+			nombres[i] = sc.next();
+		}
+		return nombres;
 	}
 
 	private static void imprimirTitulo() {
@@ -46,38 +56,37 @@ public class EjercicioTateti {
 		dibujarTrayecto(titulo);
 	}
 
-	private static void mostrarTurno(boolean[] jugadores) {
+	private static void mostrarTurno(boolean[] jugadores, String[] nombres) {
 		System.out.println();
 		if(jugadores[0]) {
-			System.out.println("Turno del jugador 0:");
+			System.out.println("Turno del jugador " + nombres[0] + ":");
 		} else {
-			System.out.println("Turno del jugador X:");
+			System.out.println("Turno del jugador " + nombres[1] + ":");
 		}
 		
 	}
 
-	private static void imprimirMensajeGanador(boolean[] jugadores) {
+	private static void imprimirMensajeGanador(boolean[] jugadores, String[] nombres) {
 		if(jugadores[0]) {
-			System.out.println("Gano el jugador O!");
+			System.out.println("Gano el jugador " + nombres[0] + "!");
 		} else {
-			System.out.println("Gano el jugador X!");
+			System.out.println("Gano el jugador " + nombres[1] + "!");
 		}
 	}
 
 	private static boolean partidaTerminada(char[][] tablero) {
-		if(tablero[0][0] != ' ' && tablero[0][0] == tablero[0][1] && tablero[0][1] == tablero[0][2]) {
-			return true;
-		} else if (tablero[1][0] != ' ' && tablero[1][0] == tablero[1][1] && tablero[1][1] == tablero[1][2]) {
-			return true;
-		} else if (tablero[2][0] != ' ' && tablero[2][0] == tablero[2][1] && tablero[2][1] == tablero[2][2]) {
-			return true;
-		} else if (tablero[0][0] != ' ' && tablero[0][0] == tablero[1][0] && tablero[1][0] == tablero[2][0]) {
-			return true;
-		} else if (tablero[0][1] != ' ' && tablero[0][1] == tablero[1][1] && tablero[1][1] == tablero[2][1]) {
-			return true;
-		} else if (tablero[0][2] != ' ' && tablero[0][2] == tablero[1][2] && tablero[1][2] == tablero[2][2]) {
-			return true;
-		} else if (tablero[0][0] != ' ' && tablero[0][0] == tablero[1][1] && tablero[1][1] == tablero[2][2]) {
+		for(int i=0; i<FILAS; i++) {
+			//FILAS IGUALES
+			if(tablero[i][0] != ' ' && tablero[i][0] == tablero[i][1] && tablero[i][1] == tablero[i][2]) {
+				return true;
+			}
+			//COLUMNAS IGUALES
+			if (tablero[0][i] != ' ' && tablero[0][i] == tablero[1][i] && tablero[1][i] == tablero[2][i]) {
+				return true;
+			}
+		}
+		//DIAGONALES
+		if (tablero[0][0] != ' ' && tablero[0][0] == tablero[1][1] && tablero[1][1] == tablero[2][2]) {
 			return true;
 		} else if (tablero[0][2] != ' ' && tablero[0][2] == tablero[1][1] && tablero[1][1] == tablero[2][0]) {
 			return true;
