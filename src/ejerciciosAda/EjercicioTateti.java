@@ -31,13 +31,17 @@ public class EjercicioTateti {
 		}
 		sc.close();
 		
+		imprimirMensajeFinal(contador, jugadores, nombreJugadores);	
+	}
+
+	private static void imprimirMensajeFinal(int contador, boolean[] jugadores, String[] nombreJugadores) {
 		System.out.println();
 		System.out.println("¡PARTIDA TERMINADA!");
 		if(contador < 9) {
-			imprimirMensajeGanador(jugadores, nombreJugadores);
+			imprimirGanador(jugadores, nombreJugadores);
 		} else {
 			System.out.println("No gano nadie :(");
-		}	
+		}
 	}
 
 	private static String[] ingresarNombreJugadores(Scanner sc) {
@@ -51,27 +55,33 @@ public class EjercicioTateti {
 
 	private static void imprimirTitulo() {
 		String titulo = "      TATETI      ";
-		dibujarTrayecto(titulo);
+		dibujarTrayecto(titulo.length(), "=");
 		System.out.println(titulo);
-		dibujarTrayecto(titulo);
+		dibujarTrayecto(titulo.length(), "=");
 	}
 
 	private static void mostrarTurno(boolean[] jugadores, String[] nombres) {
 		System.out.println();
 		if(jugadores[0]) {
-			System.out.println("Turno del jugador " + nombres[0] + ":");
+			System.out.println("Turno de " + nombres[0] + ":");
 		} else {
-			System.out.println("Turno del jugador " + nombres[1] + ":");
+			System.out.println("Turno de " + nombres[1] + ":");
 		}
 		
 	}
 
-	private static void imprimirMensajeGanador(boolean[] jugadores, String[] nombres) {
+	private static void imprimirGanador(boolean[] jugadores, String[] nombres) {
+		String nombreGanador = null;
 		if(jugadores[0]) {
-			System.out.println("Gano el jugador " + nombres[0] + "!");
+			nombreGanador = nombres[0];
 		} else {
-			System.out.println("Gano el jugador " + nombres[1] + "!");
+			nombreGanador = nombres[1];
 		}
+		String mensaje = "¡Ganó " + nombreGanador + " !";
+		System.out.println();
+		dibujarTrayecto(mensaje.length(), "~");
+		System.out.println(mensaje.toUpperCase());
+		dibujarTrayecto(mensaje.length(), "~");
 	}
 
 	private static boolean partidaTerminada(char[][] tablero) {
@@ -97,8 +107,8 @@ public class EjercicioTateti {
 	private static void ingresarJugada(boolean[] jugadores, char[][] tablero, Scanner sc) {
 		int posiciones[] = new int[2];
 		ingresarFilaYColumna(posiciones, sc);
-		while(!posicionValida(posiciones, tablero)) {
-			System.out.println("Posiciones ocupadas. Ingresalas de nuevo");
+		while(posicionInvalida(posiciones, tablero)) {
+			System.out.println("Ingresa de nuevo fila y columna");
 			ingresarFilaYColumna(posiciones, sc);
 		}
 		ingresarJugadaEnTablero(jugadores, posiciones, tablero);
@@ -125,27 +135,37 @@ public class EjercicioTateti {
 		posiciones[1] = sc.nextInt() - 1;
 	}
 
-	private static boolean posicionValida(int[] posiciones, char[][] tablero) {
-		if(posiciones[0] < 0 || posiciones[0] > FILAS ||
-			posiciones[1] < 0 || posiciones[1] > FILAS) {
-			return false;
+	private static boolean posicionInvalida(int[] posiciones, char[][] tablero) {
+		if(posiciones[0] < 0 || posiciones[0] > FILAS - 1||
+			posiciones[1] < 0 || posiciones[1] > COLUMNAS - 1) {
+			System.out.println("Jugada inválida");
+			return true;
 		} else if(tablero[posiciones[0]][posiciones[1]] != ' ') {
-			return false;
+			System.out.println("Posiciones ocupadas");
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	private static void mostrarTablero(char[][] tablero) {
 		System.out.println();
+		dibujarTrayecto(4*3 + 1, "-");
 		for(int i=0; i<FILAS; i++) {
 			for(int j=0; j<COLUMNAS; j++) {
+				if(j == 0) {
+					System.out.print("| ");
+				}
 				if(j != COLUMNAS-1) {
 					System.out.print(tablero[i][j] + " | ");
 				} else {
 					System.out.print(tablero[i][j]);
 				}
+				if (j == COLUMNAS-1) {
+					System.out.print(" |");
+				}
 			}
 			System.out.println();
+			dibujarTrayecto(4*3 + 1, "-");
 		}
 	}
 
@@ -159,9 +179,9 @@ public class EjercicioTateti {
 		return tablero;
 	}
 	
-	private static void dibujarTrayecto(String titulo) {
-		for(int i=0; i<titulo.length(); i++) {
-			System.out.print("=");
+	private static void dibujarTrayecto(int longitud, String simbolo) {
+		for(int i=0; i<longitud; i++) {
+			System.out.print(simbolo);
 		}
 		System.out.println();
 	}
