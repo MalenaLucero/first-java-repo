@@ -132,17 +132,21 @@ public class EjercicioTateti {
 	private static void ingresarFilaYColumna(int[] posiciones, Scanner sc) {
 		System.out.println("Ingresar fila");
 		posiciones[0] = sc.nextInt() - 1;
+		while(posiciones[0] < 0 || posiciones[0] > FILAS - 1) {
+			System.out.println("Numero invalido. Ingreselo de nuevo:");
+			posiciones[0] = sc.nextInt() - 1;
+		}
 		System.out.println("Ingresar columna");
 		posiciones[1] = sc.nextInt() - 1;
+		while(posiciones[1] < 0 || posiciones[1] > COLUMNAS - 1) {
+			System.out.println("Numero invalido. Ingreselo de nuevo:");
+			posiciones[1] = sc.nextInt() - 1;
+		}
 	}
 
 	private static boolean posicionInvalida(int[] posiciones, char[][] tablero) {
-		if(posiciones[0] < 0 || posiciones[0] > FILAS - 1||
-			posiciones[1] < 0 || posiciones[1] > COLUMNAS - 1) {
-			System.out.println("Jugada inválida");
-			return true;
-		} else if(tablero[posiciones[0]][posiciones[1]] != ' ') {
-			System.out.println("Posiciones ocupadas");
+		if(tablero[posiciones[0]][posiciones[1]] != ' ') {
+			System.out.println("Posicion ocupadas");
 			return true;
 		}
 		return false;
