@@ -1,6 +1,7 @@
 package ejerciciosAda;
 
 import java.util.Scanner;
+//paquetes con miniscula y guiones
 
 //un tablero de 3x3
 //dos jugadores que ingresan las coordenadas por teclado
