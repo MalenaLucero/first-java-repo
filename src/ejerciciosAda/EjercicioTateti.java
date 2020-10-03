@@ -14,28 +14,50 @@ public class EjercicioTateti {
 	private static int COLUMNAS = 3;
 	
 	public static void main(String[] args) {
-		imprimirTitulo();
 		Scanner sc = new Scanner(System.in);
-		char tablero[][] = inicializarTablero();
-		String nombreJugadores[] = ingresarNombreJugadores(sc);
-		boolean jugadores[] = {true, false};
-		int contador = 0;
+		char tablero[][] = new char[FILAS][COLUMNAS];
+		boolean jugadores[] = new boolean[2];
+		int contador;
+		boolean jugarDeNuevo = true;
 		
-		while(!partidaTerminada(tablero) && contador < 9) {
-			mostrarTurno(jugadores, nombreJugadores);
-			ingresarJugada(jugadores, tablero, sc);
-			mostrarTablero(tablero);
-			if(!partidaTerminada(tablero)) {
-				contador++;
-				cambiarJugador(jugadores);
-			}; 
+		imprimirTitulo();
+		String nombreJugadores[] = ingresarNombreJugadores(sc);
+		
+		while(jugarDeNuevo) {
+			tablero = inicializarTablero();
+			jugadores = inicializarTurnos();
+			contador = 0;
+			while(!partidaTerminada(tablero) && contador < 9) {
+				mostrarTurno(jugadores, nombreJugadores);
+				ingresarJugada(jugadores, tablero, sc);
+				mostrarTablero(tablero);
+				if(!partidaTerminada(tablero)) {
+					contador++;
+					cambiarJugador(jugadores);
+				}; 
+			}
+			mensajePartidaTerminada(contador, jugadores, nombreJugadores);	
+			jugarDeNuevo = preguntarNuevaPartida(sc);
 		}
 		sc.close();
-		
-		imprimirMensajeFinal(contador, jugadores, nombreJugadores);	
+		System.out.println("Chau!");
 	}
 
-	private static void imprimirMensajeFinal(int contador, boolean[] jugadores, String[] nombreJugadores) {
+	private static boolean preguntarNuevaPartida(Scanner sc) {
+		boolean jugarDeNuevo = false;
+		System.out.println("Jugar otra partida? (s/n)");
+		if(sc.next().equalsIgnoreCase("s")) {
+			jugarDeNuevo = true;
+		} 
+		return jugarDeNuevo;
+	}
+
+	private static boolean[] inicializarTurnos() {
+		boolean arr[] = {true, false};
+		return arr;
+	}
+
+	private static void mensajePartidaTerminada(int contador, boolean[] jugadores, String[] nombreJugadores) {
 		System.out.println();
 		System.out.println("¡PARTIDA TERMINADA!");
 		if(contador < 9) {
