@@ -30,4 +30,9 @@ public class Butaca {
 		this.numero = numero;
 		ocupado = true;
 	}
+	public void mostrarDatos() {
+		System.out.println("Numero: " + numero);
+		System.out.println("Fila: " + fila);
+		System.out.println("Columna: " + columna);
+	}
 }
