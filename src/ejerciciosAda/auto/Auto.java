@@ -16,39 +16,41 @@ package ejerciciosAda.auto;
 
 public class Auto {
 	private static final int[][] VELOCIDADES = {{0, 0}, {1, 10}, {11, 20}, {21, 31}, {31, 40}, {41, 100}};
-	private int numeroDeCambio;
+	private static final int TOTAL_CAMBIOS = 5;
+	
+	private int cambio;
 	private int velocidad;
 	
-	private int getNumeroDeCambio() {
-		return numeroDeCambio;
+	public int getCambio() {
+		return cambio;
 	}
-	private void setNumeroDeCambio(int numeroDeCambio) {
-		this.numeroDeCambio = numeroDeCambio;
+	public void setCambio(int cambio) {
+		this.cambio = cambio;
 	}
-	private int getVelocidad() {
+	public int getVelocidad() {
 		return velocidad;
 	}
-	private void setVelocidad(int velocidad) {
+	public void setVelocidad(int velocidad) {
 		this.velocidad = velocidad;
 	}
 	
 	public void subirCambio() {
-		setNumeroDeCambio(getNumeroDeCambio()+1);
+		setCambio(getCambio()+1);
 	}
 	
 	public void bajarCambio() {
-		setNumeroDeCambio(getNumeroDeCambio()-1);
+		setCambio(getCambio()-1);
 	}
 	
 	public void detener() {
-		if(getNumeroDeCambio() == 1) {
-			setNumeroDeCambio(0);
+		if(getCambio() == 1) {
+			setCambio(0);
 		}
 	}
 	
 	public void acelerar(int masVelocidad) {
 		int velocidadEsperada = velocidad + masVelocidad;
-		if((velocidadEsperada/10) == numeroDeCambio - 1) {
+		if((velocidadEsperada/10) == cambio - 1) {
 			setVelocidad(velocidadEsperada);
 		} else {
 			System.out.println("No se puede acelerar con este cambio");
@@ -57,7 +59,7 @@ public class Auto {
 	
 	public void frenar(int menosVelocidad) {
 		int velocidadEsperada = velocidad - menosVelocidad;
-		if((velocidadEsperada/10) == numeroDeCambio - 1) {
+		if((velocidadEsperada/10) == cambio - 1) {
 			setVelocidad(velocidadEsperada);
 		} else {
 			System.out.println("No se puede frenar con este cambio");
@@ -65,8 +67,8 @@ public class Auto {
 	}
 	
 	public void mostrarDatos() {
-		System.out.println("Numero de cambio: " + numeroDeCambio);
-		System.out.println("Velocidad: " + VELOCIDADES[numeroDeCambio][1]);
+		System.out.println("Numero de cambio: " + cambio);
+		System.out.println("Velocidad: " + VELOCIDADES[cambio][1]);
 	}
 	
 	
