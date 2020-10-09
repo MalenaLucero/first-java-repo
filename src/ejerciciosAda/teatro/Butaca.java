@@ -3,8 +3,18 @@ package ejerciciosAda.teatro;
 public class Butaca {
 	private int fila;
 	private int columna;
-	private boolean ocupado = false;
+	private boolean ocupado;
 	private int numero;
+	
+	public Butaca() {
+		this.ocupado = false;
+	}
+	
+	public Butaca(int numero) {
+		this.numero = numero;
+		this.ocupado = true;
+	}
+	
 	public int getFila() {
 		return fila;
 	}

@@ -7,21 +7,24 @@ public class Paquete {
 	
 	private float peso;
 	private int zona;
+	private boolean enviable;
+	
+	public Paquete(float peso, int zona) {
+		this.peso = peso;
+		this.zona = zona;
+		this.enviable = peso < 5000;
+	}
 	
 	public float getPeso() {
 		return peso;
-	}
-
-	public void setPeso(float peso) {
-		this.peso = peso;
 	}
 
 	public int getZona() {
 		return zona;
 	}
 
-	public void setZona(int zona) {
-		this.zona = zona;
+	public boolean isEnviable() {
+		return enviable;
 	}
 	
 	public float calcularPrecio() {

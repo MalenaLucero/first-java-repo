@@ -11,11 +11,14 @@ public class AppEnvios {
 		int zona = 0;
 		while(pesoEnvio != 0) {
 			zona = solicitarZona();
-			Paquete paq = new Paquete();
-			paq.setPeso(pesoEnvio);
-			paq.setZona(zona);
-			float precioTotal = paq.calcularPrecio();
-			System.out.println("El valor del envio es: " + precioTotal);
+			Paquete paq = new Paquete(pesoEnvio, zona);
+			if(paq.isEnviable()) {
+				float precioTotal = paq.calcularPrecio();
+				System.out.println("El valor del envio es: " + precioTotal);
+			} else {
+				System.out.println("El paquete no se puede enviar");
+			}
+			
 			pesoEnvio = solicitarPesoEnvio();
 		}
 	}
