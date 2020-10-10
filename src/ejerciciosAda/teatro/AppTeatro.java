@@ -14,14 +14,14 @@ public class AppTeatro {
 		Scanner sc = new Scanner(System.in);
 		Butaca[] butacas = inicializarButacas();
 		
-		imprimirTitulo("Carga de asientos");
+		TituloUtil.imprimirTitulo("Carga de asientos");
 		cargarAsientos(butacas, sc);
 		mostrarTeatro(butacas);
 		
-		imprimirTitulo("Mostrar informacion de asientos");
+		TituloUtil.imprimirTitulo("Mostrar informacion de asientos");
 		mostrarInfoAsientos(butacas, sc);
 		
-		imprimirTitulo("Programa finalizado");
+		TituloUtil.imprimirTitulo("Programa finalizado");
 	}
 
 	private static void mostrarInfoAsientos(Butaca[] butacas, Scanner sc) {
@@ -90,20 +90,6 @@ public class AppTeatro {
 			valido = true;
 		} 
 		return valido;
-	}
-
-	private static void imprimirTitulo(String titulo) {
-		System.out.println();
-		dibujarTrayecto(titulo.length(), "=");
-		System.out.println(titulo.toUpperCase());
-		dibujarTrayecto(titulo.length(), "=");
-	}
-	
-	private static void dibujarTrayecto(int longitud, String simbolo) {
-		for(int i=0; i<longitud; i++) {
-			System.out.print(simbolo);
-		}
-		System.out.println();
 	}
 
 }
