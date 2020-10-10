@@ -1,40 +1,64 @@
 package ejerciciosAda.envios;
-
 import java.util.Scanner;
-
-//tambien se puede enviar dinero o cartas
 
 public class AppEnvios {
 	public static void main(String[] args) {
-		System.out.println("Sistema de envios");
-		System.out.println();
+		Scanner sc = new Scanner(System.in);
 		
-		float pesoEnvio = solicitarPesoEnvio();
-		int zona = 0;
-		while(pesoEnvio != 0) {
-			zona = solicitarZona();
-			Paquete paq = new Paquete(pesoEnvio, zona);
-			if(paq.isEnviable()) {
-				float precioTotal = paq.calcularPrecio();
-				System.out.println("El valor del envio es: " + precioTotal);
-			} else {
-				System.out.println("El paquete no se puede enviar");
-			}
-			
-			pesoEnvio = solicitarPesoEnvio();
+		TituloUtil.imprimirTitulo("Sistema de envios");
+		int opcion = solicitarInt("Ingrese una opcion: 1.Carta, 2.Dinero, 3.Paquete", sc);
+		switch(opcion) {
+		case 1:
+			envioDeCarta(sc);
+			break;
+		case 2:
+			envioDeDinero(sc);
+			break;
+		case 3:
+			envioDePaquete(sc);
+			break;
+		case 99:
+			opcion = 99;
+			break;
+		default:
+			System.out.println("Opcion incorrecta. Ingresela de nuevo");
 		}
 	}
+	
+	private static void envioDeCarta(Scanner sc) {
+		int cantidad = solicitarInt("Ingrese la cantidad de cartas", sc);
+		int zona = solicitarInt("Ingrese la zona", sc);
+		Carta nuevaCarta = new Carta(cantidad, zona);
+		System.out.println("Cantidad de cartas: " + nuevaCarta.getCantidad());
+		System.out.println("Zona: " + nuevaCarta.getZona());
+		System.out.println("Precio final: " + nuevaCarta.getPrecioFinal());
+	}
+	
+	private static void envioDeDinero(Scanner sc) {
+		float cantidad = solicitarInt("Ingrese la cantidad de dinero", sc);
+		int zona = solicitarInt("Ingrese la zona", sc);
+		Dinero nuevoDinero = new Dinero(cantidad, zona);
+		System.out.println("Cantidad de dinero: $" + nuevoDinero.getCantidad());
+		System.out.println("Zona: " + nuevoDinero.getZona());
+		System.out.println("Precio final: " + nuevoDinero.getPrecioFinal());
+	}
+	
+	private static void envioDePaquete(Scanner sc) {
+		float cantidad = solicitarInt("Ingrese el peso del paquete", sc);
+		int zona = solicitarInt("Ingrese la zona", sc);
+		Paquete nuevoPaquete = new Paquete(cantidad, zona);
+		System.out.println("Peso del paquete: " + nuevoPaquete.getPeso());
+		System.out.println("Zona: " + nuevoPaquete.getZona());
+		System.out.println("Precio final: " + nuevoPaquete.getPrecioFinal());
+	}
 
-	private static int solicitarZona() {
-		System.out.println("Ingrese zona de envio");
-		Scanner sc = new Scanner(System.in);
+	private static int solicitarInt(String mensaje, Scanner sc) {
+		System.out.println(mensaje);
 		return sc.nextInt();
 	}
 
-	private static float solicitarPesoEnvio() {
-		System.out.println("Ingrese peso del envio");
-		Scanner sc = new Scanner(System.in);
+	private static float solicitarFloat(String mensaje, Scanner sc) {
+		System.out.println(mensaje);
 		return sc.nextFloat();
 	}
-	
 }
