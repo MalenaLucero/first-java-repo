@@ -14,6 +14,8 @@ public class AppTeatro {
 		Scanner sc = new Scanner(System.in);
 		Butaca[] butacas = inicializarButacas();
 		
+		//ButacaVIP butacaVip = new ButacaVIP(123);
+		
 		TituloUtil.imprimirTitulo("Carga de asientos");
 		cargarAsientos(butacas, sc);
 		mostrarTeatro(butacas);

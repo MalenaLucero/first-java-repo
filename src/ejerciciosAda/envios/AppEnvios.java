@@ -2,6 +2,8 @@ package ejerciciosAda.envios;
 
 import java.util.Scanner;
 
+//tambien se puede enviar dinero o cartas
+
 public class AppEnvios {
 	public static void main(String[] args) {
 		System.out.println("Sistema de envios");

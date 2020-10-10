@@ -5,14 +5,17 @@ public class Butaca {
 	private int columna;
 	private boolean ocupado;
 	private int numero;
+	protected int precio;
 	
 	public Butaca() {
 		this.ocupado = false;
+		precio = 50;
 	}
 	
 	public Butaca(int numero) {
 		this.numero = numero;
 		this.ocupado = true;
+		precio = 50;
 	}
 	
 	public int getFila() {
