@@ -1,13 +1,13 @@
 package ejerciciosAda.envios;
 
 public class Paquete extends Envio {
-	private float peso;
-	private boolean enviable;
+	public static final int PESO_MAXIMO = 5000;
 	
-	public Paquete(float peso, int zona) {
-		super(zona);
+	private float peso;
+	
+	public Paquete(float peso) {
 		this.peso = peso;
-		this.enviable = peso < 5000;
+		enviable = peso < PESO_MAXIMO && peso > 0;
 		precioBase = peso;
 	}
 	

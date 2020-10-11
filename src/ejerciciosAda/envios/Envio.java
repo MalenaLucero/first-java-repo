@@ -7,13 +7,22 @@ public class Envio {
 	
 	protected int zona;
 	protected float precioBase;
+	protected boolean enviable;
 	
-	public Envio(int zona) {
-		this.zona = zona;
+	public void setZona(int zona) {
+		if(zona == 1 || zona == 2) {
+			this.zona = zona;
+		} else {
+			this.zona = 3;
+		}
 	}
-	
+
 	public int getZona() {
 		return zona;
+	}
+	
+	public boolean isEnviable() {
+		return enviable;
 	}
 
 	public float getPrecioFinal() {
@@ -30,5 +39,11 @@ public class Envio {
 			break;
 		}
 		return precio;
+	}
+	
+	public void mostrarDatos() {
+		System.out.println("Zona: " + zona);
+		System.out.println("Precio final: $" + getPrecioFinal());
+		System.out.println("Enviable: " + enviable);
 	}
 }
