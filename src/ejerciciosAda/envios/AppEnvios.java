@@ -26,6 +26,7 @@ public class AppEnvios {
 			System.out.println();
 			opcion = solicitarInt("Ingrese una opcion: 1. Carta, 2. Dinero, 3. Paquete, 0. Salir", sc);
 		}
+		sc.close();
 		
 		TituloUtil.imprimirTitulo("Gracias por usar el sistema de envios");
 	}

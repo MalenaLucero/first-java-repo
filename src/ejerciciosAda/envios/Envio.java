@@ -10,11 +10,7 @@ public class Envio {
 	protected boolean enviable;
 	
 	public void setZona(int zona) {
-		if(zona == 1 || zona == 2) {
-			this.zona = zona;
-		} else {
-			this.zona = 3;
-		}
+		this.zona = zona == 1 || zona == 2 ? zona : 3;
 	}
 
 	public int getZona() {
@@ -25,7 +21,7 @@ public class Envio {
 		return enviable;
 	}
 
-	public float getPrecioFinal() {
+	public float calcularPrecioFinal() {
 		float precio = 0;
 		switch(zona) {
 		case 1:
@@ -43,7 +39,7 @@ public class Envio {
 	
 	public void mostrarDatosComunes() {
 		System.out.println("Zona: " + zona);
-		System.out.println("Precio final: $" + getPrecioFinal());
+		System.out.println("Precio final: $" + calcularPrecioFinal());
 		System.out.println("Enviable: " + (enviable ? "si" : "no"));
 	}
 }
