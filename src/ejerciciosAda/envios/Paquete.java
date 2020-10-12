@@ -8,14 +8,10 @@ public class Paquete extends Envio {
 	public Paquete(float peso) {
 		this.peso = peso;
 		enviable = peso < PESO_MAXIMO && peso > 0;
-		precioBase = peso;
+		precioBase = enviable ? peso : 0;
 	}
 	
 	public float getPeso() {
 		return peso;
-	}
-
-	public boolean isEnviable() {
-		return enviable;
 	}
 }

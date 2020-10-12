@@ -9,7 +9,7 @@ public class Dinero extends Envio {
 	public Dinero(float cantidad) {
 		this.cantidad = cantidad;
 		enviable = cantidad < DINERO_MAXIMO && cantidad > 0;
-		precioBase = cantidad * PORCENTAJE;
+		precioBase = enviable ? cantidad * PORCENTAJE : 0;
 	}
 
 	public float getCantidad() {

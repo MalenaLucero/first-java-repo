@@ -44,6 +44,7 @@ public class Envio {
 	public void mostrarDatos() {
 		System.out.println("Zona: " + zona);
 		System.out.println("Precio final: $" + getPrecioFinal());
-		System.out.println("Enviable: " + enviable);
+		String mensajeEnviable = enviable ? "si" : "no";
+		System.out.println("Enviable: " + mensajeEnviable);
 	}
 }

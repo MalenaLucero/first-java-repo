@@ -9,7 +9,7 @@ public class Carta extends Envio {
 	public Carta(int cantidad) {
 		this.cantidad = cantidad;
 		enviable = cantidad < CANTIDAD_MAXIMA && cantidad > 0;
-		precioBase = cantidad * PRECIO;
+		precioBase = enviable ? cantidad * PRECIO : 0;
 	}
 	
 	public int getCantidad() {
