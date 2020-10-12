@@ -15,4 +15,9 @@ public class Dinero extends Envio {
 	public float getCantidad() {
 		return cantidad;
 	}
+	
+	public void mostrarDatos() {
+		System.out.println("Cantidad de dinero: $" + cantidad);
+		mostrarDatosComunes();
+	}
 }

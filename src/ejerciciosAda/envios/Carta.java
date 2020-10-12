@@ -15,4 +15,9 @@ public class Carta extends Envio {
 	public int getCantidad() {
 		return cantidad;
 	}
+	
+	public void mostrarDatos() {
+		System.out.println("Cantidad de cartas: " + cantidad);
+		mostrarDatosComunes();
+	}
 }

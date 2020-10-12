@@ -34,9 +34,8 @@ public class AppEnvios {
 		int cantidad = solicitarInt("Ingrese la cantidad de cartas", sc);
 		Carta nuevaCarta = new Carta(cantidad);
 		if(nuevaCarta.isEnviable()) {
-			int zona = solicitarInt("Ingrese la zona", sc);
+			int zona = solicitarInt("Ingrese la zona (1, 2, 3)", sc);
 			nuevaCarta.setZona(zona);
-			System.out.println("Cantidad de cartas: " + nuevaCarta.getCantidad());
 			nuevaCarta.mostrarDatos();
 		} else {
 			System.out.println("Cantidad invalida");
@@ -47,9 +46,8 @@ public class AppEnvios {
 		float cantidad = solicitarFloat("Ingrese la cantidad de dinero", sc);
 		Dinero nuevoDinero = new Dinero(cantidad);
 		if(nuevoDinero.isEnviable()) {
-			int zona = solicitarInt("Ingrese la zona", sc);
+			int zona = solicitarInt("Ingrese la zona (1, 2, 3)", sc);
 			nuevoDinero.setZona(zona);
-			System.out.println("Cantidad de dinero: $" + nuevoDinero.getCantidad());
 			nuevoDinero.mostrarDatos();
 		} else {
 			System.out.println("Cantidad invalida");
@@ -60,9 +58,8 @@ public class AppEnvios {
 		float cantidad = solicitarFloat("Ingrese el peso del paquete", sc);
 		Paquete nuevoPaquete = new Paquete(cantidad);
 		if(nuevoPaquete.isEnviable()) {
-			int zona = solicitarInt("Ingrese la zona", sc);
+			int zona = solicitarInt("Ingrese la zona (1, 2, 3)", sc);
 			nuevoPaquete.setZona(zona);
-			System.out.println("Peso del paquete: " + nuevoPaquete.getPeso());
 			nuevoPaquete.mostrarDatos();
 		} else {
 			System.out.println("Peso invalido");

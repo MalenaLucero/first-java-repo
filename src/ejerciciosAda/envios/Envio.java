@@ -41,10 +41,9 @@ public class Envio {
 		return precio;
 	}
 	
-	public void mostrarDatos() {
+	public void mostrarDatosComunes() {
 		System.out.println("Zona: " + zona);
 		System.out.println("Precio final: $" + getPrecioFinal());
-		String mensajeEnviable = enviable ? "si" : "no";
-		System.out.println("Enviable: " + mensajeEnviable);
+		System.out.println("Enviable: " + (enviable ? "si" : "no"));
 	}
 }

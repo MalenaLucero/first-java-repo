@@ -14,4 +14,9 @@ public class Paquete extends Envio {
 	public float getPeso() {
 		return peso;
 	}
+	
+	public void mostrarDatos() {
+		System.out.println("Peso del paquete: " + peso);
+		mostrarDatosComunes();
+	}
 }
