@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class AppEnvios {
 	public static void main(String[] args) {
 		TituloUtil.imprimirTitulo("Sistema de envios");
+		Envio[] envios = new Envio[10];
 		
 		Scanner sc = new Scanner(System.in);
 		int opcion = solicitarInt("Ingrese una opcion: 1. Carta, 2. Dinero, 3. Paquete, 0. Salir", sc);
@@ -11,13 +12,13 @@ public class AppEnvios {
 		while(opcion != 0) {
 			switch(opcion) {
 			case 1:
-				envioDeCarta(sc);
+				envioDeCarta(sc, envios);
 				break;
 			case 2:
-				envioDeDinero(sc);
+				envioDeDinero(sc, envios);
 				break;
 			case 3:
-				envioDePaquete(sc);
+				envioDePaquete(sc, envios);
 				break;
 			default:
 				System.out.println("Opcion incorrecta. Ingresela de nuevo");
@@ -31,39 +32,31 @@ public class AppEnvios {
 		TituloUtil.imprimirTitulo("Gracias por usar el sistema de envios");
 	}
 	
-	private static void envioDeCarta(Scanner sc) {
+	private static void envioDeCarta(Scanner sc, Envio[] envios) {
 		int cantidad = solicitarInt("Ingrese la cantidad de cartas", sc);
 		Carta nuevaCarta = new Carta(cantidad);
-		if(nuevaCarta.isEnviable()) {
-			int zona = solicitarInt("Ingrese la zona (1, 2, 3)", sc);
-			nuevaCarta.setZona(zona);
-			nuevaCarta.mostrarDatos();
-		} else {
-			System.out.println("Cantidad invalida");
-		}
+		ingresarZona(nuevaCarta, sc);
 	}
-	
-	private static void envioDeDinero(Scanner sc) {
+
+	private static void envioDeDinero(Scanner sc, Envio[] envios) {
 		float cantidad = solicitarFloat("Ingrese la cantidad de dinero", sc);
 		Dinero nuevoDinero = new Dinero(cantidad);
-		if(nuevoDinero.isEnviable()) {
-			int zona = solicitarInt("Ingrese la zona (1, 2, 3)", sc);
-			nuevoDinero.setZona(zona);
-			nuevoDinero.mostrarDatos();
-		} else {
-			System.out.println("Cantidad invalida");
-		}
+		ingresarZona(nuevoDinero, sc);
 	}
 	
-	private static void envioDePaquete(Scanner sc) {
+	private static void envioDePaquete(Scanner sc, Envio envios[]) {
 		float cantidad = solicitarFloat("Ingrese el peso del paquete", sc);
 		Paquete nuevoPaquete = new Paquete(cantidad);
-		if(nuevoPaquete.isEnviable()) {
+		ingresarZona(nuevoPaquete, sc);
+	}
+	
+	private static void ingresarZona(Envio nuevoEnvio, Scanner sc) {
+		if(nuevoEnvio.isEnviable()) {
 			int zona = solicitarInt("Ingrese la zona (1, 2, 3)", sc);
-			nuevoPaquete.setZona(zona);
-			nuevoPaquete.mostrarDatos();
+			nuevoEnvio.setZona(zona);
+			nuevoEnvio.mostrarDatosComunes();
 		} else {
-			System.out.println("Peso invalido");
+			System.out.println("Numero invalido");
 		}
 	}
 
