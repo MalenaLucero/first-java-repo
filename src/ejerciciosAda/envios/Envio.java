@@ -42,4 +42,8 @@ public class Envio {
 		System.out.println("Precio final: $" + calcularPrecioFinal());
 		System.out.println("Enviable: " + (enviable ? "si" : "no"));
 	}
+	
+	public static void unMetodoEstatico() {
+		System.out.println("Metodo estatico de Envio");
+	}
 }

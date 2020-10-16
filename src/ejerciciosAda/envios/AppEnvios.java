@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class AppEnvios {
 	public static void main(String[] args) {
 		TituloUtil.imprimirTitulo("Sistema de envios");
+		Envio.unMetodoEstatico();
 		Envio[] envios = new Envio[10];
 		
 		Scanner sc = new Scanner(System.in);
