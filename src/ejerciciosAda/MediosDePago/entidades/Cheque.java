@@ -35,4 +35,9 @@ public class Cheque extends Pago {
 	public void setBanco(String banco) {
 		this.banco = banco;
 	}
+	
+	public void mostrarDatos() {
+		System.out.println("Medio de pago: cheque");
+		mostrarDatosComunes();
+	}
 }

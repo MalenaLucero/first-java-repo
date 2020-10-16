@@ -44,4 +44,9 @@ public class TarjetaDeCredito extends Pago {
 	public void setCodigoSeguridad(String codigoSeguridad) {
 		this.codigoSeguridad = codigoSeguridad;
 	}
+	
+	public void mostrarDatos() {
+		System.out.println("Medio de pago: tarjeta");
+		mostrarDatosComunes();
+	}
 }

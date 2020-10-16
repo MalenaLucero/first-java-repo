@@ -5,4 +5,9 @@ public class Efectivo extends Pago {
 		super(monto, moneda);
 		montoMasImpuestos = monto;
 	}
+	
+	public void mostrarDatos() {
+		System.out.println("Medio de pago: efectivo");
+		mostrarDatosComunes();
+	}
 }

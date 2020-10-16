@@ -8,10 +8,17 @@ public class Pago {
 	
 	public Pago(float monto, String moneda) {
 		this.monto = monto;
+		this.moneda = moneda;
 	}
 
 	public float getMonto() {
 		return monto;
+	}
+	
+	public void mostrarDatosComunes() {
+		System.out.println("Monto: $" + monto);
+		System.out.println("Monto mas impuestos: $" + montoMasImpuestos);
+		System.out.println("Moneda: " + moneda);
 	}
 	
 }

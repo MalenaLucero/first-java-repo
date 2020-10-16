@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import ejerciciosAda.MediosDePago.entidades.Cheque;
 import ejerciciosAda.MediosDePago.entidades.Efectivo;
+import ejerciciosAda.MediosDePago.entidades.Pago;
 import ejerciciosAda.MediosDePago.entidades.TarjetaDeCredito;
 
 //Se desea registrar los pagos realizados por los clientes
@@ -35,27 +36,48 @@ public class AppMediosDePago {
 			default:
 				System.out.println("Medio de pago invalido");
 			}
+			System.out.println();
 			monto = solicitarFloat("Ingresar el importe o 0 para salir", sc);
 		}
 		
+		totalPorMedioDePago(pagosEfectivo, "efectivo");
+		totalPorMedioDePago(pagosCheque, "cheque");
+		totalPorMedioDePago(pagosTarjeta, "tarjeta");
+		
+		System.out.println();
+		System.out.println("Programa finalizado");
+		
 	}
 	
+	private static void totalPorMedioDePago(Pago[] pagos, String medioDePago) {
+		float total = 0;
+		int contador = 0;
+		while(pagos[contador] != null) {
+			total += pagos[contador].getMonto();
+			contador++;
+		}
+		System.out.println("Total pagado con " + medioDePago + ": $" + total);
+	}
+
 	private static void generarPagoTarjeta(float monto, int[] contadores, TarjetaDeCredito[] pagosTarjeta) {
 		TarjetaDeCredito nuevoPago = new TarjetaDeCredito(monto, "pesos");
 		pagosTarjeta[contadores[2]] = nuevoPago;
 		contadores[2]++;
+		nuevoPago.mostrarDatos();
 	}
 
 	private static void generarPagoCheque(float monto, int[] contadores, Cheque[] pagosCheque) {
 		Cheque nuevoPago = new Cheque(monto, "pesos");
 		pagosCheque[contadores[1]] = nuevoPago;
 		contadores[1]++;
+		nuevoPago.mostrarDatos();
 	}
 
 	private static void generarPagoEfectivo(float monto, int[] contadores, Efectivo[] pagosEfectivo) {
 		Efectivo nuevoPago = new Efectivo(monto, "pesos");
 		pagosEfectivo[contadores[0]] = nuevoPago;
 		contadores[0]++;
+		nuevoPago.mostrarDatos();
 	}
 
 	private static float solicitarFloat(String mensaje, Scanner sc) {
