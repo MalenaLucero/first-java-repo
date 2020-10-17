@@ -45,6 +45,15 @@ public class TarjetaDeCredito extends Pago {
 		this.codigoSeguridad = codigoSeguridad;
 	}
 	
+	@Override
+	public boolean validar() {
+		if(numero.length() > 2) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public void mostrarDatos() {
 		System.out.println("Medio de pago: tarjeta");
 		mostrarDatosComunes();

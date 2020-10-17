@@ -6,6 +6,11 @@ public class Efectivo extends Pago {
 		montoMasImpuestos = monto;
 	}
 	
+	@Override
+	public boolean validar() {
+		return true;
+	}
+	
 	public void mostrarDatos() {
 		System.out.println("Medio de pago: efectivo");
 		mostrarDatosComunes();

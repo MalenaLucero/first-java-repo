@@ -40,4 +40,13 @@ public class Cheque extends Pago {
 		System.out.println("Medio de pago: cheque");
 		mostrarDatosComunes();
 	}
+
+	@Override
+	public boolean validar() {
+		if(numero.length() > 2) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
