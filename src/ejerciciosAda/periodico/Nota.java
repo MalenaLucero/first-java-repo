@@ -9,4 +9,10 @@ public class Nota extends Publicacion {
 		this.autor = autor;
 		precio = 0;
 	}
+	
+	public void mostrarDatos() {
+		System.out.println("Tipo: nota");
+		System.out.println("Titulo: " + titulo);
+		System.out.println("Autor: " + autor);
+	}
 }

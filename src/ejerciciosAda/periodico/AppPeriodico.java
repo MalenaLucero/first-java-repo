@@ -10,7 +10,7 @@ import java.util.Scanner;
 //conocer el total facturado en la publicacion
 
 public class AppPeriodico {
-	private static int TOTAL_PUBLICACIONES = 2;
+	private static int TOTAL_PUBLICACIONES = 3;
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -18,33 +18,38 @@ public class AppPeriodico {
 		float totalFacturado = 0;
 		
 		for(int i=0; i<TOTAL_PUBLICACIONES; i++) {
-			int tipo = solicitarInt("Ingresar tipo de publicacion: 1.Nota, 2.Publicidad, 0.Salir", sc);
+			int tipo = solicitarInt("Ingresar tipo de publicacion: 1.Nota, 2.Publicidad", sc);
 			if(tipo == 1) {
 				String titulo = solicitarString("Ingresar titulo", sc);
 				String autor = solicitarString("Ingresar autor", sc);
 				Nota nuevaNota = new Nota(titulo, autor);
 				publicaciones[i] = nuevaNota;
-			} else if(tipo == 2) {
+			} else {
 				int tamano = solicitarInt("Ingresar tamaño", sc);
-				Publicidad nuevaPublicidad = new Publicidad(tamano);
+				String marca = solicitarString("Ingresar la marca", sc);
+				Publicidad nuevaPublicidad = new Publicidad(tamano, marca);
 				publicaciones[i] = nuevaPublicidad;
 				totalFacturado += nuevaPublicidad.getPrecio();
-				System.out.println(totalFacturado);
 			}
 		}
 		
-		System.out.println(totalFacturado);
-
+		System.out.println("Total facturado: " + totalFacturado);
+		for(int i=0; i<TOTAL_PUBLICACIONES; i++) {
+			System.out.println();
+			System.out.println("------ Publicacion " + (i+1) + " ------");
+			if(publicaciones[i] instanceof Nota) {
+				Nota nota = (Nota)publicaciones[i];
+				nota.mostrarDatos();
+			} else if(publicaciones[i] instanceof Publicidad) {
+				Publicidad publicidad = (Publicidad)publicaciones[i];
+				publicidad.mostrarDatos();
+			}
+		}
 	}
 	
 	private static String solicitarString(String mensaje, Scanner sc) {
 		System.out.println(mensaje);
 		return sc.next();
-	}
-	
-	private static float solicitarFloat(String mensaje, Scanner sc) {
-		System.out.println(mensaje);
-		return sc.nextFloat();
 	}
 	
 	private static int solicitarInt(String mensaje, Scanner sc) {
