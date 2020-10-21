@@ -12,12 +12,8 @@ public class Publicidad extends Publicacion {
 		precio = tamano < 200 ? PRECIO_1 : PRECIO_2;
 	}
 	
-	public void mostrarDatos() {
-		System.out.println("Tipo: publicidad");
-		System.out.println("Marca: " + marca);
-		System.out.println("Tamano: " + tamano);
-		System.out.println("Precio: $" + precio);
+	public String toString() {
+		return String.format("Tipo: publicidad, Marca: %s, Tamano: %s, Precio: $%s",
+								marca, tamano, precio);
 	}
-	
-	
 }

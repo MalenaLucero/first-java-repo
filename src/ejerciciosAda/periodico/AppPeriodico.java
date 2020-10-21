@@ -39,10 +39,10 @@ public class AppPeriodico {
 			System.out.println("------ Publicacion " + (i+1) + " ------");
 			if(publicaciones[i] instanceof Nota) {
 				Nota nota = (Nota)publicaciones[i];
-				nota.mostrarDatos();
+				System.out.println(nota.toString());
 			} else if(publicaciones[i] instanceof Publicidad) {
 				Publicidad publicidad = (Publicidad)publicaciones[i];
-				publicidad.mostrarDatos();
+				System.out.println(publicidad.toString());
 			}
 		}
 	}

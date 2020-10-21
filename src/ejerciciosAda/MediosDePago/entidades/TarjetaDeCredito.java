@@ -58,4 +58,8 @@ public class TarjetaDeCredito extends Pago {
 		System.out.println("Medio de pago: tarjeta");
 		mostrarDatosComunes();
 	}
+	
+	public String toString() {
+		return moneda + " " + monto;
+	}
 }
