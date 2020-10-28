@@ -30,9 +30,20 @@ public class AppResumenBancario {
 		System.out.println("MOVIMIENTOS ORDENADOR POR FECHA");
 		imprimirMovimientos(movimientosPorFecha);
 		
-		
+		pruebasConInterfaces();
 	}
 	
+	private static void pruebasConInterfaces() {
+		System.out.println();
+		System.out.println("PRUEBAS CON LA INTERFACE");
+		PlazoFijo plazoFijo = new PlazoFijo();
+		plazoFijo.cancelar("necesito la plata");
+		plazoFijo.mostrarMensaje();
+		Prestamo prestamo = new Prestamo();
+		prestamo.cancelar("tengo la plata para pagarlo taca taca");
+		prestamo.mostrarMensaje();
+	}
+
 	private static void ordenarPorFecha(Movimiento[] movimientos) {
 		for (int i = 0; i < movimientos.length - 1; i++) {
             for (int j = 0; j < movimientos.length - 1; j++) { 
