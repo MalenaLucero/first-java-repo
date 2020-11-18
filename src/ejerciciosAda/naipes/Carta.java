@@ -11,6 +11,10 @@ public class Carta {
 		this.comodin = false;
 	}
 	
+	public Valores getValor() {
+		return valor;
+	}
+	
 	public Carta(boolean comodin) {
 		this.comodin = true;
 	}
