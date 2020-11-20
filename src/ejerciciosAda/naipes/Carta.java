@@ -2,16 +2,16 @@ package ejerciciosAda.naipes;
 
 public class Carta {
 	private Palos palo;
-	private Valores valor;
+	private EnumValores valor;
 	private boolean comodin;
 	
-	public Carta(Valores valor, Palos palo) {
+	public Carta(EnumValores valor, Palos palo) {
 		this.palo = palo;
 		this.valor = valor;
 		this.comodin = false;
 	}
 	
-	public Valores getValor() {
+	public EnumValores getValor() {
 		return valor;
 	}
 	
@@ -26,4 +26,6 @@ public class Carta {
 			return String.format("%s de %s", valor, palo);
 		}
 	}
+	
+	
 }

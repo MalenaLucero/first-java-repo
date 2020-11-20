@@ -48,6 +48,7 @@ public class AppNaipes {
 		List<Carta> cartasRepartidas = new ArrayList<Carta>();
 		pedirCartas(sc, cartasRepartidas, mazo);
 		int total = sumarCartas(cartasRepartidas);
+		System.out.println(total);
 		jugador.setCartas(cartasRepartidas);
 		jugador.setTotal(total);
 		System.out.println("Total: " + jugador.getTotal());
@@ -56,7 +57,10 @@ public class AppNaipes {
 	private static int sumarCartas(List<Carta> jugador) {
 		int total = 0;
 		for(Carta carta: jugador) {
-			total += MapaDeValores.getValores().get(carta.getValor());
+			if(carta.getValor().equals(EnumValores.A)) {
+				System.out.println("As");
+			}
+			total += carta.getValor().getValor();
 		}
 		return total;
 	}
@@ -75,11 +79,7 @@ public class AppNaipes {
 	private static List<Carta> generarMazo() {
 		List<Carta> mazo = new ArrayList<Carta>();
 		
-		for(int i = 0; i < 2; i++) {
-			mazo.add(new Carta(true));
-		}
-		
-		for(Valores valor: Valores.values()) {
+		for(EnumValores valor: EnumValores.values()) {
 			for(Palos palo: Palos.values()) {
 				mazo.add(new Carta(valor, palo));
 			}
