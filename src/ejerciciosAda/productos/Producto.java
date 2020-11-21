@@ -1,5 +1,7 @@
 package ejerciciosAda.productos;
 
+import java.text.DecimalFormat;
+
 public class Producto {
 	private int codigo;
 	private double precio;
@@ -26,6 +28,7 @@ public class Producto {
 	}
 	
 	public String toString() {
-		return String.format("Codigo: %s - Precio: %s", codigo, precio);
+		DecimalFormat decimalFormat = new DecimalFormat("#.##");
+		return String.format("Codigo: %s - Precio: $%s", codigo, decimalFormat.format(precio));
 	}
 }

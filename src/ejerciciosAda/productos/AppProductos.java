@@ -1,5 +1,8 @@
 package ejerciciosAda.productos;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 //se venden productos por la web de la empresa y se dispone de 100 productos con codigo numerico
@@ -19,12 +22,18 @@ public class AppProductos {
 			productos[i] = new Producto(codigo, randomValue);
 		}
 		
+		List<Producto> productosRandom = new ArrayList<Producto>(); 
 		for(int i=0; i < 10; i++) {
 			int numero = (int) (Math.random() * 100 + 1);
-			System.out.println(numero);
-			System.out.println(productos[numero - 1]);
+			productosRandom.add(productos[numero - 1]);
 		}
 		
-		//for(Producto prod: productos) { System.out.println(prod); }
+		System.out.println("Productos random:");
+		for(Producto prod: productosRandom) { System.out.println(prod); }
+		
+		double total = productosRandom.stream().mapToDouble(x -> x.getPrecio()).sum();
+		DecimalFormat decimalFormat = new DecimalFormat("#.##");
+		System.out.println();
+		System.out.println("Total: $" + decimalFormat.format(total));
 	}
 }
