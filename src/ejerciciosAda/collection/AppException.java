@@ -18,6 +18,6 @@ public class AppException {
 	}
 	
 	private static void throwsException() throws MadeUpException {
-		throw new MadeUpException();
+		throw new MadeUpException("Mensaje de la excepcion");
 	}
 }
