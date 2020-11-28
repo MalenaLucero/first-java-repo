@@ -1,6 +1,5 @@
 package ejerciciosAda.collection;
 
-import java.text.SimpleDateFormat;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -18,8 +17,6 @@ public class AppExceptionPrueba {
 		} catch(Exception e) {
 			System.out.println("Exception");
 		}
-		
-		SimpleDateFormat simpleDate = new SimpleDateFormat("ddMMyyyy");
-		
+		sc.close();
 	}
 }
