@@ -44,4 +44,24 @@ public class CursoDAO {
 		addCourse.setString(2, course.getTeacher());
 		return addCourse.executeUpdate();
 	}
+	
+	public static int editCourse(String field, String input, int id, Connection connection) throws SQLException {
+		String editString = null;
+		if(field.equals("teacher")) {
+			editString = "UPDATE curso set teacher = ? WHERE id=?";
+		} else {
+			editString = "UPDATE curso set name = ? WHERE id=?";
+		} 
+		PreparedStatement editCourse = connection.prepareStatement(editString);
+		editCourse.setString(1, input);
+		editCourse.setInt(2, id);
+		return editCourse.executeUpdate();
+	}
+	
+	public static int deleteCourse(int id, Connection connection) throws SQLException {
+		String deleteString = "DELETE FROM curso WHERE id = ?";
+		PreparedStatement deleteCourse = connection.prepareStatement(deleteString);
+		deleteCourse.setInt(1, id);
+		return deleteCourse.executeUpdate();
+	}
 }

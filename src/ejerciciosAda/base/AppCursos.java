@@ -12,6 +12,7 @@ import ejerciciosAda.base.DAO.AdminDB;
 import ejerciciosAda.base.DAO.CursoDAO;
 import ejerciciosAda.base.model.Curso;
 import ejerciciosAda.base.util.MenuUtil;
+import ejerciciosAda.base.util.ResponseUtil;
 
 public class AppCursos {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
@@ -45,23 +46,32 @@ public class AppCursos {
 					case 3:
 						System.out.println("Agregar curso");
 						System.out.println("Nombre del curso:");
-						String name = sc.nextLine();
 						sc.nextLine();
+						String name = sc.nextLine();
 						System.out.println("Nombre del docente:");
 						String teacher = sc.nextLine();
 						Curso nuevoCurso = new Curso(name, teacher);
 						int res = CursoDAO.insertCourse(nuevoCurso, connection);
-						if(res == 1) {
-							System.out.println("Curso agregado");
-						} else {
-							System.out.println("Error");
-						}
+						ResponseUtil.DBMessage(res, "Curso agregado");
 						break;
 					case 4:
 						System.out.println("Modificar curso");
+						System.out.println("ID");
+						int idCourse = sc.nextInt();
+						System.out.println("Campo a modificar:");
+						sc.nextLine();
+						String field = sc.nextLine();
+						System.out.println("Modificacion:");
+						String modification = sc.nextLine();
+						int editRes = CursoDAO.editCourse(field, modification, idCourse, connection);
+						ResponseUtil.DBMessage(editRes, "Curso modificado");
 						break;
 					case 5:
 						System.out.println("Eliminar curso");
+						System.out.println("ID:");
+						int deleteId = sc.nextInt();
+						int deleteRes = CursoDAO.deleteCourse(deleteId, connection);
+						ResponseUtil.DBMessage(deleteRes, "Curso eliminado");
 						break;
 					default:
 						System.out.println("Opcion invalida. Ingresela de nuevo");
@@ -119,6 +129,7 @@ public class AppCursos {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}*/
+		sc.close();
 		System.out.println("Programa finalizado");
 	}
 
