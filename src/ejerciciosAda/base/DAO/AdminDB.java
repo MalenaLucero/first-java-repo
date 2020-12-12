@@ -1,4 +1,4 @@
-package ejerciciosAda.base;
+package ejerciciosAda.base.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

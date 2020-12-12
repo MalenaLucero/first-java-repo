@@ -4,13 +4,87 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class AppConexionBase {
-	public static void main(String[] args) {
+import ejerciciosAda.base.DAO.AdminDB;
+import ejerciciosAda.base.DAO.CursoDAO;
+import ejerciciosAda.base.model.Curso;
+import ejerciciosAda.base.util.MenuUtil;
+
+public class AppCursos {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		Connection connection = AdminDB.obtenerConexion();
 		System.out.println("Bienvenido al sistema de cursos");
+		MenuUtil.printMainMenu();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Elija una opcion:");
+		int option = sc.nextInt();
+		while(option != 0) {
+			switch(option) {
+			case 1:
+				MenuUtil.printCoursesMenu();
+				System.out.println("Elija una opcion:");
+				int courseOption = sc.nextInt();
+				while(courseOption != 0) {
+					switch(courseOption) {
+					case 1:
+						System.out.println("Listado de cursos");
+						List<Curso> courses = new ArrayList<Curso>();
+						courses = CursoDAO.listarCursos(connection);
+						System.out.println(courses);
+						break;
+					case 2:
+						System.out.println("Buscar curso por id");
+						System.out.println("ID:");
+						int id = sc.nextInt();
+						Curso curso = CursoDAO.findCourseById(id, connection);
+						System.out.println(curso);
+						break;
+					case 3:
+						System.out.println("Agregar curso");
+						System.out.println("Nombre del curso:");
+						String name = sc.nextLine();
+						sc.nextLine();
+						System.out.println("Nombre del docente:");
+						String teacher = sc.nextLine();
+						Curso nuevoCurso = new Curso(name, teacher);
+						int res = CursoDAO.insertCourse(nuevoCurso, connection);
+						if(res == 1) {
+							System.out.println("Curso agregado");
+						} else {
+							System.out.println("Error");
+						}
+						break;
+					case 4:
+						System.out.println("Modificar curso");
+						break;
+					case 5:
+						System.out.println("Eliminar curso");
+						break;
+					default:
+						System.out.println("Opcion invalida. Ingresela de nuevo");
+					}
+					System.out.println("Elija una opcion:");
+					courseOption = sc.nextInt();
+				}
+				break;
+			case 2: 
+				System.out.println("Alumnos");
+				break;
+			case 3:
+				System.out.println("Inscripciones");
+				break;
+			default:
+				System.out.println("Opcion invalida. Ingresela de nuevo");
+			}
+			MenuUtil.printMainMenu();
+			System.out.println("Elija una opcion:");
+			option = sc.nextInt();
+		}
 		
-		try {
+		/*try {
 			System.out.println("Estableciendo conexion a la base de datos...");
 			Connection connection = AdminDB.obtenerConexion();
 			System.out.println("Conectado a la base de datos");
@@ -44,7 +118,7 @@ public class AppConexionBase {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}*/
 		System.out.println("Programa finalizado");
 	}
 
