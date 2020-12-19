@@ -22,25 +22,25 @@ public class StudentMenu {
 	public static void chooseMenuOption(Connection connection, int option) throws SQLException {
 		switch(option) {
 		case 1:
-			StudentController.listStudents(connection);
+			StudentController.listAll(connection);
 			break;
 		case 2:
-			StudentController.getStudentById(connection, 2);
+			StudentController.getById(connection, 2);
 			break;
 		case 3:
-			StudentController.getStudentsByLastname(connection, "Kurou");
+			StudentController.getByLastname(connection, "Kurou");
 			break;
 		case 4:
 			Student student = new Student("Touru", "Oikawa", "及川徹");
-			StudentController.addStudent(connection, student);
+			StudentController.insert(connection, student);
 			break;
 		case 5:
-			Student editStudent = StudentDAO.findStudentById(connection, 14);
+			Student editStudent = StudentDAO.findById(connection, 14);
 			editStudent.setName("Kenma");
-			StudentController.editStudent(connection, editStudent);
+			StudentController.edit(connection, editStudent);
 			break;
 		case 6:
-			StudentController.deleteStudent(connection, 2);
+			StudentController.delete(connection, 2);
 			break;
 		}
 	}

@@ -6,11 +6,12 @@ import java.util.List;
 
 import ejerciciosAda.base.DAO.StudentDAO;
 import ejerciciosAda.base.model.Student;
+import ejerciciosAda.base.util.ResponseUtil;
 
 public class StudentController {
-	public static void listStudents(Connection connection) throws SQLException {
+	public static void listAll(Connection connection) throws SQLException {
 		System.out.println("Listado de alumnos");
-		List<Student> students = StudentDAO.getStudents(connection);
+		List<Student> students = StudentDAO.getAll(connection);
 		if(students.size() == 0) {
 			System.err.println("No se encontraron alumnos");
 		} else {
@@ -20,8 +21,8 @@ public class StudentController {
 		}
 	}
 	
-	public static void getStudentById(Connection connection, int id) throws SQLException {
-		Student student = StudentDAO.findStudentById(connection, id);
+	public static void getById(Connection connection, int id) throws SQLException {
+		Student student = StudentDAO.findById(connection, id);
 		if(student == null) {
 			System.err.println("No se encontro el alumno");
 		} else {
@@ -29,8 +30,8 @@ public class StudentController {
 		}
 	}
 	
-	public static void getStudentsByLastname(Connection connection, String lastname) throws SQLException {
-		List<Student> students = StudentDAO.findStudentByLastname(connection, lastname);
+	public static void getByLastname(Connection connection, String lastname) throws SQLException {
+		List<Student> students = StudentDAO.findByLastname(connection, lastname);
 		if(students.size() == 0) {
 			System.err.println("No se encontraron alumnos");
 		} else {
@@ -40,37 +41,26 @@ public class StudentController {
 		}
 	}
 	
-	public static void addStudent(Connection connection, Student student) throws SQLException {
+	public static void insert(Connection connection, Student student) throws SQLException {
 		System.out.println("Agregar alumno");
-		List<Student> overlappingStudents = StudentDAO.findStudentByNameAndLastname(connection, student.getName(), student.getLastname());
+		List<Student> overlappingStudents = StudentDAO.findByNameAndLastname(connection, student.getName(), student.getLastname());
 		if(overlappingStudents.size() == 0) {
-			int res = StudentDAO.insertStudent(student, connection);
-			if(res == 1) {
-				System.out.println("Se agrego el alumno");
-			} else {
-				System.err.println("No se agrego el alumno");
-			}
+			int res = StudentDAO.insert(student, connection);
+			ResponseUtil.addMessage(res);
 		} else {
 			System.err.println("Ya existe un alumno con ese nombre y apellido");
 		}	
 	}
 
-	public static void editStudent(Connection connection, Student student) throws SQLException {
-		int res = StudentDAO.editStudent(connection, student);
-		if(res == 1) {
-			System.out.println("Se realizo la modificacion");
-		} else {
-			System.err.println("No se realizo la modificacion");
-		}
+	public static void edit(Connection connection, Student student) throws SQLException {
+		System.out.println("Editar alumno");
+		int res = StudentDAO.edit(connection, student);
+		ResponseUtil.editMessage(res);
 	}
 	
-	public static void deleteStudent(Connection connection, int id) throws SQLException {
+	public static void delete(Connection connection, int id) throws SQLException {
 		System.out.println("Eliminar alumno");
-		int res = StudentDAO.deleteStudent(id, connection);
-		if(res == 1) {
-			System.out.println("El alumno se elimino correctamente");
-		} else {
-			System.err.println("No se elimino el alumno. Verificar que exista.");
-		}
+		int res = StudentDAO.delete(id, connection);
+		ResponseUtil.deleteMessage(res);
 	}
 }

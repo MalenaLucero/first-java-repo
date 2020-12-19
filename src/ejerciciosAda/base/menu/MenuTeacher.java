@@ -3,10 +3,9 @@ package ejerciciosAda.base.menu;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import ejerciciosAda.base.DAO.EnrollmentDAO;
-import ejerciciosAda.base.controller.EnrollmentController;
+import ejerciciosAda.base.DAO.TeacherDAO;
 import ejerciciosAda.base.controller.TeacherController;
-import ejerciciosAda.base.model.Enrollment;
+import ejerciciosAda.base.model.Teacher;
 
 public class MenuTeacher {
 	public static void printMenu() {
@@ -23,26 +22,25 @@ public class MenuTeacher {
 	public static void chooseMenuOption(Connection connection, int option) throws SQLException {
 		switch(option) {
 		case 1:
-			TeacherController.listTeachers(connection);
+			TeacherController.listAll(connection);
 			break;
 		case 2:
-			EnrollmentController.getEnrollmentById(connection, 1);
+			TeacherController.getById(connection, 3);
 			break;
 		case 3:
-			EnrollmentController.getEnrollmentByCourseAndStudent(connection, 5, 1);
+			TeacherController.getByLastname(connection, "Kim");
 			break;
 		case 4:
-			Enrollment enrollment = new Enrollment(1, 3);
-			EnrollmentController.addEnrollment(connection, enrollment);
+			Teacher teacher = new Teacher("prueba", "prueba");
+			TeacherController.insert(connection, teacher);
 			break;
 		case 5:
-			Enrollment editEnrollment = EnrollmentDAO.findEnrollmentById(connection, 10);
-			editEnrollment.setState("aprobado");
-			editEnrollment.setYear(2020);
-			EnrollmentController.editEnrollment(connection, editEnrollment);
+			Teacher editTeacher = TeacherDAO.findById(connection, 10);
+			editTeacher.setAlternative_name1("nombre alternativo");
+			TeacherController.edit(connection, editTeacher);
 			break;
 		case 6:
-			EnrollmentController.deleteEnrollment(connection, 11);
+			TeacherController.delete(connection, 10);
 			break;
 		}
 	}

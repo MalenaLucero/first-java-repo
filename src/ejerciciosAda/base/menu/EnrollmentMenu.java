@@ -22,26 +22,26 @@ public class EnrollmentMenu {
 	public static void chooseMenuOption(Connection connection, int option) throws SQLException {
 		switch(option) {
 		case 1:
-			EnrollmentController.listEnrollments(connection);
+			EnrollmentController.listAll(connection);
 			break;
 		case 2:
-			EnrollmentController.getEnrollmentById(connection, 1);
+			EnrollmentController.getById(connection, 1);
 			break;
 		case 3:
-			EnrollmentController.getEnrollmentByCourseAndStudent(connection, 5, 1);
+			EnrollmentController.getByCourseAndStudent(connection, 5, 1);
 			break;
 		case 4:
 			Enrollment enrollment = new Enrollment(1, 3);
-			EnrollmentController.addEnrollment(connection, enrollment);
+			EnrollmentController.insert(connection, enrollment);
 			break;
 		case 5:
-			Enrollment editEnrollment = EnrollmentDAO.findEnrollmentById(connection, 10);
+			Enrollment editEnrollment = EnrollmentDAO.findById(connection, 10);
 			editEnrollment.setState("aprobado");
 			editEnrollment.setYear(2020);
-			EnrollmentController.editEnrollment(connection, editEnrollment);
+			EnrollmentController.edit(connection, editEnrollment);
 			break;
 		case 6:
-			EnrollmentController.deleteEnrollment(connection, 11);
+			EnrollmentController.delete(connection, 11);
 			break;
 		}
 	}

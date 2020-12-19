@@ -22,24 +22,24 @@ public class CourseMenu {
 	public static void chooseMenuOption(Connection connection, int option) throws SQLException {
 		switch(option) {
 		case 1:
-			CursoController.listCourses(connection);
+			CursoController.listAll(connection);
 			break;
 		case 2:
-			CursoController.getCourseById(connection, 1);
+			CursoController.getById(connection, 1);
 			break;
 		case 3:
-			CursoController.getCourseByName(connection, "mongo db");
+			CursoController.getByName(connection, "mongo db");
 			break;
 		case 4:
 			Curso course = new Curso("python");
-			CursoController.addCourse(connection, course);
+			CursoController.insert(connection, course);
 			break;
 		case 5:
-			Curso editCourse = CursoDAO.findCourseById(connection, 17);
-			CursoController.modificarCurso(connection, editCourse);
+			Curso editCourse = CursoDAO.findById(connection, 17);
+			CursoController.edit(connection, editCourse);
 			break;
 		case 6:
-			CursoController.deleteCourse(connection, 17);
+			CursoController.delete(connection, 17);
 			break;
 		}
 	}

@@ -10,7 +10,7 @@ import java.util.List;
 import ejerciciosAda.base.model.Enrollment;
 
 public class EnrollmentDAO {
-	public static List<Enrollment> getEnrollments(Connection connection) throws SQLException {
+	public static List<Enrollment> getAll(Connection connection) throws SQLException {
 		String listString = "SELECT * FROM inscripcion";
 		PreparedStatement listEnrollments = connection.prepareStatement(listString);
 		ResultSet res = listEnrollments.executeQuery();
@@ -24,7 +24,7 @@ public class EnrollmentDAO {
 		return enrollments;
 	}
 	
-	public static Enrollment findEnrollmentById(Connection connection, int id) throws SQLException {
+	public static Enrollment findById(Connection connection, int id) throws SQLException {
 		String listString = "SELECT * FROM inscripcion WHERE id= ?";
 		PreparedStatement findEnrollment = connection.prepareStatement(listString);
 		findEnrollment.setInt(1, id);
@@ -38,7 +38,7 @@ public class EnrollmentDAO {
 		return enrollment;
 	}
 	
-	public static List<Enrollment> findEnrollmentByCourseAndStudent(Connection connection, int id_course, int id_student) throws SQLException {
+	public static List<Enrollment> findByCourseAndStudent(Connection connection, int id_course, int id_student) throws SQLException {
 		String listString = "SELECT * FROM inscripcion WHERE id_curso = ? AND id_alumno = ?";
 		PreparedStatement findEnrollments = connection.prepareStatement(listString);
 		findEnrollments.setInt(1, id_course);
@@ -54,7 +54,7 @@ public class EnrollmentDAO {
 		return enrollments;
 	}
 	
-	public static int insertEnrollment(Enrollment enrollment, Connection connection) throws SQLException {
+	public static int insert(Enrollment enrollment, Connection connection) throws SQLException {
 		String insertString = "INSERT INTO inscripcion (id_curso, id_alumno, estado_inscripcion, id_docente, comision, nota1, nota2, promedio, estado_cursada, ciclo_lectivo)"
 								+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement addEnrollment = connection.prepareStatement(insertString);
@@ -87,7 +87,7 @@ public class EnrollmentDAO {
 		return addEnrollment.executeUpdate();
 	}
 	
-	public static int editEnrollment(Connection connection, Enrollment enrollment) throws SQLException {
+	public static int edit(Connection connection, Enrollment enrollment) throws SQLException {
 		String editString = "UPDATE inscripcion SET id_curso = ?, id_alumno = ?, estado_inscripcion = ?,"
 				+ "id_docente = ?, comision = ?, nota1 = ?, nota2 = ?, promedio = ?,"
 				+ "estado_cursada = ?, ciclo_lectivo = ? WHERE id = ?";
@@ -122,7 +122,7 @@ public class EnrollmentDAO {
 		return editEnrollment.executeUpdate();
 	}
 	
-	public static int deleteEnrollment(int id, Connection connection) throws SQLException {
+	public static int delete(int id, Connection connection) throws SQLException {
 		String deleteString = "DELETE FROM inscripcion WHERE id = ?";
 		PreparedStatement deleteEnrollment = connection.prepareStatement(deleteString);
 		deleteEnrollment.setInt(1, id);
