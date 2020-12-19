@@ -3,17 +3,15 @@ package ejerciciosAda.base.model;
 public class Curso {
 	private int id;
 	private String name;
-	private int id_teacher;
 	private int id_catedra;
 	
 	public Curso(String name) {
 		this.name = name;
 	}
 	
-	public Curso(int id, String name, int id_teacher, int id_catedra) {
+	public Curso(int id, String name, int id_catedra) {
 		this.id = id;
 		this.name = name;
-		this.id_teacher = id_teacher;
 		this.id_catedra = id_catedra;
 	}
 
@@ -23,14 +21,6 @@ public class Curso {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public int getTeacher() {
-		return id_teacher;
-	}
-
-	public void setTeacher(int id_teacher) {
-		this.id_teacher = id_teacher;
 	}
 	
 	public int getCatedra() {

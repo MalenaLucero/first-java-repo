@@ -10,28 +10,6 @@ public class MenuUtil {
 		System.out.println();
 	}
 	
-	public static void printCoursesMenu() {
-		System.out.println("------ MENU DE CURSOS ------");
-		System.out.println("1. Listar cursos");
-		System.out.println("2. Buscar curso");
-		System.out.println("3. Agregar curso");
-		System.out.println("4. Modificar curso");
-		System.out.println("5. Eliminar curso");
-		System.out.println("0. Volver al menu principal");
-		System.out.println();
-	}
-	
-	public static void printStudentsMenu() {
-		System.out.println("------ MENU DE ALUMNOS ------");
-		System.out.println("1. Listar alumnos");
-		System.out.println("2. Buscar alumno");
-		System.out.println("3. Agregar alumno");
-		System.out.println("4. Modificar alumno");
-		System.out.println("5. Eliminar alumno");
-		System.out.println("0. Volver al menu principal");
-		System.out.println();
-	}
-	
 	public static void printInscriptionsMenu() {
 		System.out.println("------ MENU DE INSCRIPCIONES ------");
 		System.out.println("1. Inscribir alumno");

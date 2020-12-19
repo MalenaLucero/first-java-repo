@@ -16,7 +16,7 @@ public class CursoDAO {
 		ResultSet res = listCourses.executeQuery();
 		List<Curso> courses = new ArrayList<Curso>();
 		while(res.next()) {
-			Curso curso = new Curso(res.getInt("id"), res.getString("nombre"), res.getInt("id_docente"), res.getInt("id_catedra"));
+			Curso curso = new Curso(res.getInt("id"), res.getString("nombre"), res.getInt("id_catedra"));
 			courses.add(curso);
 		}
 		return courses;
@@ -29,7 +29,7 @@ public class CursoDAO {
 		ResultSet res = listCourses.executeQuery();
 		Curso course = null;
 		if(res.next()) {
-			course = new Curso(res.getInt("id"), res.getString("nombre"), res.getInt("id_docente"), res.getInt("id_catedra"));
+			course = new Curso(res.getInt("id"), res.getString("nombre"), res.getInt("id_catedra"));
 		}
 		return course;
 	}
@@ -41,7 +41,7 @@ public class CursoDAO {
 		ResultSet res = listCourses.executeQuery();
 		Curso course = null;
 		if(res.next()) {
-			course = new Curso(res.getInt("id"), res.getString("nombre"), res.getInt("id_docente"), res.getInt("id_catedra"));
+			course = new Curso(res.getInt("id"), res.getString("nombre"), res.getInt("id_catedra"));
 		}
 		return course;
 	}
@@ -54,27 +54,16 @@ public class CursoDAO {
 	}
 	
 	public static int editCourse(Connection connection, Curso course) throws SQLException {
-		String editString = "UPDATE curso SET nombre = ?, id_docente = ?, id_catedra = ? WHERE id = ?";
+		String editString = "UPDATE curso SET nombre = ?, id_catedra = ? WHERE id = ?";
 		PreparedStatement editCourse = connection.prepareStatement(editString);
-		int res = 0;
-		if(course.getName().length() == 0 || course.getName() == null) {
-			System.out.println("El nombre del curso es requerido");
+		editCourse.setString(1, course.getName());
+		if(course.getCatedra() == 0) {
+			editCourse.setNull(2, java.sql.Types.NULL);
 		} else {
-			editCourse.setString(1, course.getName());
-			if(course.getTeacher() == 0) {
-				editCourse.setNull(2, java.sql.Types.NULL);
-			} else {
-				editCourse.setInt(2, course.getTeacher());
-			}
-			if(course.getCatedra() == 0) {
-				editCourse.setNull(3, java.sql.Types.NULL);
-			} else {
-				editCourse.setInt(3, course.getCatedra());
-			}
-			editCourse.setInt(4, course.getId());
-			res = editCourse.executeUpdate();
+			editCourse.setInt(2, course.getCatedra());
 		}
-		return res;
+		editCourse.setInt(3, course.getId());
+		return editCourse.executeUpdate();
 	}
 	
 	public static int deleteCourse(int id, Connection connection) throws SQLException {

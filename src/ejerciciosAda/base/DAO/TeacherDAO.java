@@ -8,20 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ejerciciosAda.base.model.Enrollment;
+import ejerciciosAda.base.model.Teacher;
 
-public class EnrollmentDAO {
-	public static List<Enrollment> getEnrollments(Connection connection) throws SQLException {
-		String listString = "SELECT * FROM inscripcion";
-		PreparedStatement listEnrollments = connection.prepareStatement(listString);
-		ResultSet res = listEnrollments.executeQuery();
-		List<Enrollment> enrollments = new ArrayList<Enrollment>();
+public class TeacherDAO {
+	public static List<Teacher> getTeachers(Connection connection) throws SQLException {
+		String listString = "SELECT * FROM docente";
+		PreparedStatement listTeachers = connection.prepareStatement(listString);
+		ResultSet res = listTeachers.executeQuery();
+		List<Teacher> teachers = new ArrayList<Teacher>();
 		while(res.next()) {
-			Enrollment enrollment = new Enrollment(res.getInt("id"), res.getInt("id_curso"), res.getInt("id_alumno"),
-					res.getString("estado_inscripcion"), res.getInt("id_docente"), res.getString("comision"), res.getInt("nota1"),
-					res.getInt("nota2"), res.getInt("promedio"), res.getString("estado_cursada"), res.getInt("ciclo_lectivo"));
-			enrollments.add(enrollment);
+			Teacher teacher = new Teacher(res.getInt("id"), res.getString("nombre"), res.getString("apellido"), res.getString("nombre_alternativo1"),
+								res.getString("nombre_alternativo2"), res.getString("descripcion"), res.getString("imagen"));
+			teachers.add(teacher);
 		}
-		return enrollments;
+		return teachers;
 	}
 	
 	public static Enrollment findEnrollmentById(Connection connection, int id) throws SQLException {
