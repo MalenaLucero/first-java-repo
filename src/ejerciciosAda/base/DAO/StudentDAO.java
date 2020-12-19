@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ejerciciosAda.base.model.Curso;
 import ejerciciosAda.base.model.Student;
 
 public class StudentDAO {

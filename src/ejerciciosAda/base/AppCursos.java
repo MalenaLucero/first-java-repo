@@ -1,29 +1,26 @@
 package ejerciciosAda.base;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 import ejerciciosAda.base.DAO.AdminDB;
 import ejerciciosAda.base.DAO.CursoDAO;
+import ejerciciosAda.base.DAO.EnrollmentDAO;
 import ejerciciosAda.base.DAO.StudentDAO;
 import ejerciciosAda.base.controller.CursoController;
+import ejerciciosAda.base.controller.EnrollmentController;
 import ejerciciosAda.base.controller.StudentController;
 import ejerciciosAda.base.model.Curso;
+import ejerciciosAda.base.model.Enrollment;
 import ejerciciosAda.base.model.Student;
 import ejerciciosAda.base.util.MenuUtil;
-import ejerciciosAda.base.util.ResponseUtil;
 
 public class AppCursos {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		Connection connection = AdminDB.obtenerConexion();
 		System.out.println("Bienvenido al sistema de cursos");
 		MenuUtil.printMainMenu();
-		int option = 2;
+		int option = 3;
 	
 		switch(option) {
 		case 1:
@@ -95,8 +92,30 @@ public class AppCursos {
 		}
 	}
 	
-	private static void enrollment(Connection connection) {
-		// TODO Auto-generated method stub
-		
+	private static void enrollment(Connection connection) throws SQLException {
+		int enrollmentOption = 5;
+		switch(enrollmentOption) {
+		case 1:
+			EnrollmentController.listEnrollments(connection);
+			break;
+		case 2:
+			EnrollmentController.getEnrollmentById(connection, 1);
+			break;
+		case 3:
+			EnrollmentController.getEnrollmentByCourseAndStudent(connection, 5, 1);
+			break;
+		case 4:
+			Enrollment enrollment = new Enrollment(1, 3);
+			EnrollmentController.addEnrollment(connection, enrollment);
+			break;
+		case 5:
+			Enrollment editEnrollment = EnrollmentDAO.findEnrollmentById(connection, 5);
+			editEnrollment.setAverage_grade(10);
+			EnrollmentController.editEnrollment(connection, editEnrollment);
+			break;
+		case 6:
+			EnrollmentController.deleteEnrollment(connection, 6);
+			break;
+		}
 	}
 }

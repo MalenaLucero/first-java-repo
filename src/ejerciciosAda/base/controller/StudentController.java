@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import ejerciciosAda.base.DAO.CursoDAO;
 import ejerciciosAda.base.DAO.StudentDAO;
-import ejerciciosAda.base.model.Curso;
 import ejerciciosAda.base.model.Student;
 
 public class StudentController {

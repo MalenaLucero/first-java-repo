@@ -49,7 +49,11 @@ public class Enrollment {
 	}
 
 	public void setAverage_grade(int average_grade) {
-		this.average_grade = average_grade;
+		if(average_grade < 1 || average_grade > 10) {
+			System.out.println("Promedio invalido");
+		} else {
+			this.average_grade = average_grade;
+		}
 	}
 
 	public String getState() {
@@ -69,7 +73,7 @@ public class Enrollment {
 	}
 	
 	public String toString() {
-		if(this.state.equals("en curso")) {
+		if(this.average_grade == 0) {
 			return String.format("ID: %s - ID alumno: %s - ID curso: %s", id, id_student, id_course);
 		} else {
 			return String.format("ID: %s - ID alumno: %s - ID curso: %s - Estado: %s - Promedio: %s - Año: %s",
